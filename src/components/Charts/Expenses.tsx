@@ -63,7 +63,8 @@ const Expenses = () => {
         <XAxis dataKey='name' className={"fill-expenses"} />
         <YAxis />
         <Tooltip />
-        <Bar dataKey='gider' className='fill-expenses bg-transparent ' activeBar={<Rectangle />} />
+        <Legend />
+        <Bar dataKey='gider' fill="#f87171" activeBar={<Rectangle />} />
       </BarChart>
     </ResponsiveContainer>
   );

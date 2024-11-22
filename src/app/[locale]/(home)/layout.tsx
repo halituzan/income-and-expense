@@ -1,9 +1,10 @@
+import Sidebar from "@/components/Sidebar";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import "../../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import Sidebar from "@/components/Sidebar";
+import { Poppins } from "next/font/google";
+import "../../globals.css";
+import StoreProvider from "./StoreProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,20 +29,22 @@ const LocaleLayout = async ({
       <body className={poppins.className}>
         <div className='min-h-screen flex flex-col md:flex-row justify-between relative'>
           <NextIntlClientProvider messages={messages}>
-            <aside className="hidden md:block">
-              <Sidebar />
-            </aside>
-            <main className='flex-1 w-full py-4 overflow-y-auto h-screen'>
-              {children}
-            </main>
-            <div className="mobile-navbar sticky bottom-0 w-full h-10 bg-red-500 shadow-sm flex md:hidden justify-center">
-              <div>
-                asd
+            <StoreProvider >
+              <aside className="hidden md:block">
+                <Sidebar />
+              </aside>
+              <main className='flex-1 w-full py-4 overflow-y-auto h-screen'>
+                {children}
+              </main>
+              <div className="mobile-navbar sticky bottom-0 w-full h-10 bg-red-500 shadow-sm flex md:hidden justify-center">
+                <div>
+                  asd
+                </div>
+                <div>
+                  asd
+                </div>
               </div>
-              <div>
-                asd
-              </div>
-            </div>
+            </StoreProvider>
           </NextIntlClientProvider>
         </div>
       </body>

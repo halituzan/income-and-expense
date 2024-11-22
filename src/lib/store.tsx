@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoSlice from "./features/todos/todoSlice";
+import expenditureSlice from "./features/expenditure";
 
-const store = configureStore({
-  reducer: {
-    todo: todoSlice,
-  },
-});
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      expenditure: expenditureSlice,
+    },
+  });
+};
 
-export default store;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

@@ -68,7 +68,8 @@ const Incomes = () => {
                 <XAxis dataKey='name' />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey='gelir' className='fill-incomes bg-transparent' activeBar={<Rectangle />} />
+                <Legend />
+                <Bar dataKey='gelir' fill="#059669" activeBar={<Rectangle />} />
             </BarChart>
         </ResponsiveContainer>
     );
