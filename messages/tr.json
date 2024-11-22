@@ -1,0 +1,18 @@
+{
+    "Common": {
+        "title": "Kalbiniz kadar temiz bir Next.js projesi.",
+        "content": "# Hazır Kurulumlar",
+        "stageManagement": "state yönetimi kullanıldı.",
+        "cssLibrary": "CSS kütüphanesi kullanıldı",
+        "iconLibrary": "icon kütüphanesi kullanıldı.",
+        "localization": "ile dil yapılandırması yapıldı.",
+        "english": "İngilizce",
+        "turkish": "Türkçe",
+        "selectLanguage": "Dil seçin"
+    },
+    "Sidebar": {
+        "home": "Ana Sayfa",
+        "incomes": "Gelirler",
+        "expenses": "Giderler"
+    }
+}
