@@ -3,6 +3,7 @@ export interface ExpenditureValues {
   amount?: string;
   categoryId?: string;
   date?: any;
+  description?: string;
 }
 export interface ExpenditureState {
   incomes: object[];
@@ -18,11 +19,13 @@ const initialState: ExpenditureState = {
     amount: "",
     categoryId: "",
     date: "",
+    description: "",
   },
   expenseValues: {
     amount: "",
     categoryId: "",
     date: "",
+    description: "",
   },
 };
 
@@ -49,10 +52,20 @@ const expenditure = createSlice({
       state.expenseValues[action.payload.key] = action.payload.value;
     },
     clearIncomeValues: (state) => {
-      state.incomeValues = { amount: "", categoryId: "", date: "" };
+      state.incomeValues = {
+        amount: "",
+        categoryId: "",
+        date: "",
+        description: "",
+      };
     },
     clearExpenseValues: (state) => {
-      state.expenseValues = { amount: "", categoryId: "", date: "" };
+      state.expenseValues = {
+        amount: "",
+        categoryId: "",
+        date: "",
+        description: "",
+      };
     },
   },
 });

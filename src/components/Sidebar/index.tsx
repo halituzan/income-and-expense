@@ -1,5 +1,5 @@
 "use client"
-import { Icon } from "@iconify/react";
+
 import React, { useState } from "react";
 import navigation from "@/navigation";
 import VerticalMenuItems from "./VerticalMenu/VerticalMenuItems";
@@ -32,6 +32,7 @@ const Sidebar = () => {
           );
         })}
       </div>
+
     </div>
   );
 };

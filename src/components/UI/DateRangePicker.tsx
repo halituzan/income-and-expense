@@ -7,8 +7,7 @@ const DateRangePicker = () => {
     const [endDate, setEndDate] = useState<Date | undefined>();
 
     return (
-        <div className="flex flex-col items-center space-y-4">
-            <h2 className="text-xl font-semibold">Tarih Aralığı</h2>
+        <div className="flex flex-col md:flex-row items-center">
             <div className="flex items-center border rounded-lg">
                 <DatePicker
                     selected={startDate}
@@ -16,9 +15,10 @@ const DateRangePicker = () => {
                     selectsStart
                     startDate={startDate}
                     endDate={endDate}
-                    className="w-40 p-2 outline-none rounded-l-lg text-center"
+                    className="w-[110px] p-2 outline-none rounded-l-lg text-center"
                     placeholderText="Start Date"
                 />
+                <span>-</span>
                 <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date ?? undefined)}
@@ -26,7 +26,7 @@ const DateRangePicker = () => {
                     startDate={startDate}
                     endDate={endDate}
                     minDate={startDate}
-                    className="w-40 p-2 outline-none rounded-r-lg text-center"
+                    className="w-[110px] p-2 outline-none rounded-r-lg text-center"
                     placeholderText="End Date"
                 />
             </div>

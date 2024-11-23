@@ -16,6 +16,19 @@ const config: Config = {
         primary: "#475569",
         white: "#fff",
       },
+      keyframes: {
+        "fade-in-up": {
+          "0%": {
+            transform: "translateY(100%)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+      },
+      animation: {
+        fadeInUp: "fade-in-up 0.2s",
+      },
     },
   },
   plugins: [],
