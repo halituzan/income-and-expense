@@ -41,8 +41,6 @@ export default function CategoryManager() {
   const removeCategory = (type: 'income' | 'expense', id: string) => {
     if (type === 'income') {
       const oldData = getIncomesCategories()
-      console.log("oldData", oldData);
-
       const data = oldData.filter((item: { id: string }) => item.id !== id)
       localStorage.setItem(incomeCategory, JSON.stringify(data))
       setNewIncomeCategory("")
@@ -60,8 +58,8 @@ export default function CategoryManager() {
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Gelir Kategorileri */}
-        <div className="bg-incomes/10 p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4 text-incomes">Incomes</h2>
+        <div className="bg-incomes/10 dark:bg-incomes p-4 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-incomes dark:text-slate-100">Incomes</h2>
           <form onSubmit={(e) => { e.preventDefault(); addCategory("income"); }} className="mb-4">
             <div className="flex">
               <input
@@ -69,11 +67,11 @@ export default function CategoryManager() {
                 value={newIncomeCategory}
                 onChange={(e) => setNewIncomeCategory(e.target.value)}
                 placeholder="Yeni gelir kalemi"
-                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none "
+                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100"
               />
               <button
                 type="submit"
-                className="bg-incomes text-white px-4 py-2 rounded-r-md hover:bg-incomes focus:outline-none"
+                className="bg-incomes dark:bg-primary text-white px-4 py-2 rounded-r-md hover:bg-incomes dark:hover:bg-primary/80 focus:outline-none"
               >
                 Ekle
               </button>
@@ -82,10 +80,10 @@ export default function CategoryManager() {
           <ul className="space-y-2">
             {incomeCategories.map((category: Category) => (
               <div className='flex items-center w-full'>
-                <li key={category.id} className="bg-white p-2 rounded shadow flex-1">{category.name}</li>
+                <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1">{category.name}</li>
                 <button
                   onClick={() => removeCategory("income", category.id)}
-                  className="bg-expenses/80 text-white px-4 py-2 rounded-r-md hover:bg-expenses focus:outline-none"
+                  className="bg-warning/80 text-white px-4 py-2 rounded-r-md hover:bg-warning focus:outline-none"
                 >
                   <Icon icon="material-symbols:delete" />
                 </button>
@@ -95,8 +93,8 @@ export default function CategoryManager() {
         </div>
 
         {/* Gider Kategorileri */}
-        <div className="bg-expenses/10 p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4 text-expenses">Expenses</h2>
+        <div className="bg-expenses/10 dark:bg-expenses p-4 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4 text-expenses dark:text-slate-100">Expenses</h2>
           <form onSubmit={(e) => { e.preventDefault(); addCategory('expense'); }} className="mb-4">
             <div className="flex">
               <input
@@ -104,11 +102,11 @@ export default function CategoryManager() {
                 value={newExpenseCategory}
                 onChange={(e) => setNewExpenseCategory(e.target.value)}
                 placeholder="Yeni gider kalemi"
-                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none"
+                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100"
               />
               <button
                 type="submit"
-                className="bg-expenses/80 text-white px-4 py-2 rounded-r-md hover:bg-expenses focus:outline-none"
+                className="bg-expenses/80 dark:bg-primary text-white px-4 py-2 rounded-r-md hover:bg-expenses focus:outline-none"
               >
                 Ekle
               </button>
@@ -117,10 +115,10 @@ export default function CategoryManager() {
           <ul className="space-y-2">
             {expenseCategories.map((category: Category) => (
               <div className='flex items-center w-full'>
-                <li key={category.id} className="bg-white p-2 rounded shadow flex-1">{category.name}</li>
+                <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1">{category.name}</li>
                 <button
                   onClick={() => removeCategory("expense", category.id)}
-                  className="bg-expenses/80 text-white px-4 py-2 rounded-r-md hover:bg-expenses focus:outline-none"
+                  className="bg-warning/80 text-white px-4 py-2 rounded-r-md hover:bg-warning focus:outline-none"
                 >
                   <Icon icon="material-symbols:delete" />
                 </button>

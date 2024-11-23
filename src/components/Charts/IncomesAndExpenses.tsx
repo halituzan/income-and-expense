@@ -2,85 +2,26 @@ import dateToMonth from '@/helpers/dateToMonth';
 import { selectExpenses, selectIncomes, setExpenses, setIncomes } from '@/lib/features/expenditure';
 import getExpense from '@/services/Expense/getExpense';
 import getIncome from '@/services/Income/getIncome';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-    BarChart,
     Bar,
-    Cell,
-    XAxis,
-    YAxis,
+    BarChart,
     CartesianGrid,
-    Tooltip,
     Legend,
     ReferenceLine,
     ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
 } from 'recharts';
+import useTheme from '../hooks/useTheme';
 
-const data = [
-    {
-        name: 'Ocak',
-        gider: -4000,
-        gelir: 2400,
-    },
-    {
-        name: 'Şubat',
-        gider: -3000,
-        gelir: 1398,
-    },
-    {
-        name: 'Mart',
-        gider: -2000,
-        gelir: 6000,
-    },
-    {
-        name: 'Nisan',
-        gider: -2780,
-        gelir: 3908,
-    },
-    {
-        name: 'Mayıs',
-        gider: -1890,
-        gelir: 4800,
-    },
-    {
-        name: 'Haziran',
-        gider: -2390,
-        gelir: 3800,
-    },
-    {
-        name: 'Temmuz',
-        gider: -1290,
-        gelir: 3500,
-    },
-    {
-        name: 'Ağustor',
-        gider: -3490,
-        gelir: 5300,
-    },
-    {
-        name: 'Eylül',
-        gider: -1490,
-        gelir: 2300,
-    },
-    {
-        name: 'Ekim',
-        gider: -3490,
-        gelir: 4300,
-    },
-    {
-        name: 'Kasım',
-        gider: -3290,
-        gelir: 4300,
-    },
-    {
-        name: 'Aralık',
-        gider: -999,
-        gelir: 6000,
-    },
-];
+
 
 const IncomesAndExpenses = () => {
+    const { theme } = useTheme()
+    const axisColor = theme === "dark" ? "#ffffff" : "#475569";
     const dispatch = useDispatch();
     const income = useSelector(selectIncomes);
     const expense = useSelector(selectExpenses)
@@ -139,8 +80,8 @@ const IncomesAndExpenses = () => {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
+                <XAxis dataKey="name" tick={{ fill: axisColor }} />
+                <YAxis tick={{ fill: axisColor }} />
                 <Tooltip />
                 <Legend />
                 <ReferenceLine y={0} stroke="#000" />

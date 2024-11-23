@@ -17,7 +17,6 @@ const LanguageSwitcher = ({ open }: any) => {
         router.push(newPath);
         toggleLanguage(newLang);
     };
-    console.log("lang", lang);
 
     return (
         <button

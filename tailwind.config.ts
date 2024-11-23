@@ -16,6 +16,7 @@ const config: Config = {
         expenses: "#f87171",
         primary: "#475569",
         white: "#fff",
+        warning: "#f59e0b",
       },
       keyframes: {
         "fade-in-up": {

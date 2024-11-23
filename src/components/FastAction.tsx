@@ -96,15 +96,14 @@ const FastAction = (props: Props) => {
   }, []);
   return (
     <div className='h-full flex flex-col justify-between'>
-      <div className='w-full shadow bg-white grid grid-cols-2 gap-2 mb-4 rounded-lg'>
+      <div className='w-full shadow bg-slate-100 grid grid-cols-2 gap-2 mb-4 rounded-lg'>
         <button
           onClick={() => {
             dispatch(clearIncomeValues());
             setTab("income");
           }}
-          className={`col-span-1 h-8 rounded-l-md transition-all delay-100 ${
-            tab == "income" ? "bg-primary text-white" : ""
-          }`}
+          className={`col-span-1 h-8 rounded-l-md transition-all delay-100 ${tab == "income" ? "bg-primary dark:bg-slate-900 text-white" : ""
+            }`}
         >
           Gelir
         </button>
@@ -113,9 +112,8 @@ const FastAction = (props: Props) => {
             dispatch(clearExpenseValues());
             setTab("expense");
           }}
-          className={`col-span-1 h-8 rounded-r-md transition-all delay-100 ${
-            tab == "expense" ? "bg-primary text-white" : ""
-          }`}
+          className={`col-span-1 h-8 rounded-r-md transition-all delay-100 ${tab == "expense" ? "bg-primary dark:bg-slate-900 text-white" : ""
+            }`}
         >
           Gider
         </button>
@@ -127,7 +125,7 @@ const FastAction = (props: Props) => {
         <div className='col-span-12 mt-0'>
           <label
             htmlFor='amount'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
             Miktar
           </label>
@@ -140,14 +138,14 @@ const FastAction = (props: Props) => {
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           />
         </div>
         <div className='col-span-12 mt-0'>
           <label
             htmlFor='description'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
             Açıklama
           </label>
@@ -159,14 +157,14 @@ const FastAction = (props: Props) => {
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           />
         </div>
         <div className='col-span-12 mt-0'>
           <label
             htmlFor='categoryId'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
             Kategori
           </label>
@@ -177,7 +175,7 @@ const FastAction = (props: Props) => {
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           >
             <option value=''>Kategori Seçin</option>
@@ -198,7 +196,7 @@ const FastAction = (props: Props) => {
         <div className='col-span-12 mt-0'>
           <label
             htmlFor='date'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
             Harcama Zamanı
           </label>
@@ -211,7 +209,7 @@ const FastAction = (props: Props) => {
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           />
         </div>

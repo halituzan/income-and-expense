@@ -19,23 +19,22 @@ const Modal = ({
 }: Props) => {
   return (
     <div
-      className={`fixed top-0 left-0 z-50 w-screen h-screen bg-primary/10 justify-center items-center transition-all delay-500 ${
-        open ? "flex" : "hidden"
-      }`}
+      className={`fixed top-0 left-0 z-50 w-screen h-screen bg-primary/10 justify-center items-center transition-all delay-500 ${open ? "flex" : "hidden"
+        }`}
     >
       <div
-        className='bg-white w-[600px] p-4 rounded-lg shadow-lg h-96 animate-fadeInUp flex flex-col'
+        className='bg-slate-100 dark:bg-primary w-[600px] p-4 rounded-lg shadow shadow-primary/50 dark:shadow-slate-500/50 h-96 animate-fadeInUp flex flex-col'
         style={{ width, minHeight: height, height: "auto" }}
       >
         <div className='w-full flex justify-between items-center'>
-          <h3 className='text-lg font-semibold'>{title}</h3>
+          <h3 className='text-lg font-semibold text-primary dark:text-slate-100'>{title}</h3>
           <button
             onClick={close}
-            className='bg-primary/10 group hover:bg-primary p-1 rounded-full'
+            className='bg-primary/10 hover:bg-primary dark:hover:bg-slate-800 p-1 rounded-full group dark:bg-slate-100'
           >
             <Icon
               icon={"iconamoon:close-bold"}
-              className='text-primary group-hover:text-white'
+              className='text-primary-slate-100 dark:text-primary group-hover:text-slate-100 dark:group-hover:text-slate-100'
             />
           </button>
         </div>

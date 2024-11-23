@@ -15,8 +15,11 @@ import {
 } from "recharts";
 import getIncome from "@/services/Income/getIncome";
 import dateToMonth from "@/helpers/dateToMonth";
+import useTheme from "../hooks/useTheme";
 
 const Incomes = () => {
+  const { theme } = useTheme()
+  const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
   const income = useSelector(selectIncomes);
   const formatData = income.map((item: any) => {
@@ -55,8 +58,8 @@ const Incomes = () => {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
-        <YAxis />
+        <XAxis dataKey="name" tick={{ fill: axisColor }} />
+        <YAxis tick={{ fill: axisColor }} />
         <Tooltip />
         <Legend />
         <Bar dataKey='income' fill='#059669' activeBar={<Rectangle />} />

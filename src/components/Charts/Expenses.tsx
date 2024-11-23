@@ -15,8 +15,11 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import useTheme from "../hooks/useTheme";
 
 const Expenses = () => {
+  const { theme } = useTheme()
+  const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
   const expense = useSelector(selectExpenses)
   const formatData = expense.map((item: any) => {
@@ -50,7 +53,6 @@ const Expenses = () => {
         width={500}
         height={300}
         data={groupedData}
-
         margin={{
           top: 5,
           right: 30,
@@ -59,8 +61,8 @@ const Expenses = () => {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' className={"fill-expenses"} />
-        <YAxis />
+        <XAxis dataKey="name" tick={{ fill: axisColor }} />
+        <YAxis tick={{ fill: axisColor }} />
         <Tooltip />
         <Legend />
         <Bar dataKey='expense' fill="#f87171" activeBar={<Rectangle />} />
