@@ -7,7 +7,6 @@ export default () => {
   const data = (window.localStorage.getItem(expenses) as string) || "[]";
   const parsedData = JSON.parse(data);
   const expensesCategory = getExpensesCategories();
-  console.log("parsedData", parsedData);
 
   const newData = parsedData.map((item: ExpenseItem) => {
     return {

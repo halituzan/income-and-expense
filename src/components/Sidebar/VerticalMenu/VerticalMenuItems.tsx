@@ -2,8 +2,10 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { NavigationProps } from "@/types";
+import { useTranslations } from "next-intl";
 
 const VerticalMenuItems = ({ open, item }: { open: boolean, item: NavigationProps }) => {
+  const t = useTranslations("Sidebar")
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
@@ -23,7 +25,7 @@ const VerticalMenuItems = ({ open, item }: { open: boolean, item: NavigationProp
         <Icon icon={item.icon} fontSize={24} />
       </span>{" "}
       <p className="min-w-max">
-        {(open) && item.label}
+        {(open) && t(item.label)}
       </p>
     </button>
   );

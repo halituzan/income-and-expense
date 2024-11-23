@@ -28,14 +28,14 @@ const IncomesAndExpenses = () => {
     const income = useSelector(selectIncomes);
     const expense = useSelector(selectExpenses)
     const formatIncomeData: FormattedData[] = income.map(
-        (item: { category: Category; amount: number, date: string }) => {
+        (item: any) => {
             return {
                 name: dateToMonth(item.date) as string,
                 id: item.category.id,
                 [t("Income.tableName")]: item.amount,
             };
         });
-    const formatExpenseData: FormattedData[] = expense.map((item: { category: Category; amount: number, date: string }) => {
+    const formatExpenseData: FormattedData[] = expense.map((item: any) => {
         return {
             name: dateToMonth(item.date) as string,
             id: item.category.id,
@@ -43,7 +43,6 @@ const IncomesAndExpenses = () => {
         };
     });
     const concatData: FormattedData[] = [...formatIncomeData, ...formatExpenseData]
-    console.log("concatData", concatData);
 
     const groupedData = concatData.reduce((acc: FormattedData[], current: FormattedData) => {
         const existingItem = acc.find(

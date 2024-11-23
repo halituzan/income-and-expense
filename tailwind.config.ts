@@ -35,10 +35,28 @@ const config: Config = {
             transform: "translateY(0)",
           },
         },
+        "logo-animate": {
+          "0%": {
+            width: "0px",
+          },
+          // "25%": {
+          //   width: "10px",
+          // },
+          // "50%": {
+          //   width: "20px",
+          // },
+          // "75%": {
+          //   width: "30px",
+          // },
+          "100%": {
+            width: "auto",
+          },
+        },
       },
       animation: {
         fadeInUp: "fade-in-up 0.2s",
         menuFadeUp: "menu-fade-up 0.1s",
+        logoAnimate: "logo-animate 0.2s",
       },
     },
   },

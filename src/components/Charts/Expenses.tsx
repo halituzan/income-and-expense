@@ -26,7 +26,7 @@ const Expenses = () => {
   const expense = useSelector(selectExpenses);
 
   const formatData: FormattedData[] = expense.map(
-    (item: { category: Category; amount: number }) => {
+    (item: any) => {
       return {
         name: item.category.name,
         id: item.category.id,

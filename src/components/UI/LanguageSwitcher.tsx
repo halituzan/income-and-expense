@@ -11,8 +11,6 @@ const LanguageSwitcher = ({ open }: { open: boolean }) => {
     const updateLanguage = (newLang: "en" | "tr") => {
         const segments = path.split("/").filter(Boolean);
         segments[0] = newLang;
-        console.log("segments", segments);
-
         const newPath = `/${segments.join("/")}`;
         router.push(newPath);
         toggleLanguage(newLang);

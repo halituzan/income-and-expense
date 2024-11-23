@@ -83,10 +83,10 @@ const Incomes = () => {
                   </div>
                   <div className='text-right'>
                     <p className='font-bold text-lg text-primary dark:text-slate-50'>
-                      {expense.amount.toFixed(2)} TL
+                      {expense?.amount?.toFixed(2)} TL
                     </p>
                     <p className='text-sm text-primary/80 dark:text-slate-200'>
-                      {expense.date.toLocaleString()}
+                      {expense?.date?.toLocaleString()}
                     </p>
                   </div>
                 </div>

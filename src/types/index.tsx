@@ -1,14 +1,14 @@
 export interface ExpenseItem {
     category?: Category;
-    amount: number;
-    date: string;
-    id: string;
+    amount?: number;
+    date?: string;
+    id?: string;
     description?: string
     categoryId?: string
 }
 export interface Category {
-    id: string;
-    name: string;
+    id?: string;
+    name?: string;
 };
 
 export interface FormattedData {

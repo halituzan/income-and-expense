@@ -25,7 +25,7 @@ const Incomes = () => {
   const dispatch = useDispatch();
   const income = useSelector(selectIncomes);
   const formatData: FormattedData[] = income.map(
-    (item: { category: Category; amount: number }) => {
+    (item: any) => {
       return {
         name: item.category.name,
         id: item.category.id,

@@ -86,11 +86,11 @@ export default function CategoryManager() {
             </div>
           </form>
           <ul className="space-y-2">
-            {incomeCategories.map((category: Category) => (
+            {incomeCategories?.map((category: Category) => (
               <div className='flex items-center w-full'>
                 <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1">{category.name}</li>
                 <button
-                  onClick={() => removeCategory("income", category.id)}
+                  onClick={() => removeCategory("income", category?.id as string)}
                   className="bg-warning/80 text-white px-4 py-2 rounded-r-md hover:bg-warning focus:outline-none"
                 >
                   <Icon icon="material-symbols:delete" />
@@ -125,7 +125,7 @@ export default function CategoryManager() {
               <div className='flex items-center w-full'>
                 <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1">{category.name}</li>
                 <button
-                  onClick={() => removeCategory("expense", category.id)}
+                  onClick={() => removeCategory("expense", category.id as string)}
                   className="bg-warning/80 text-white px-4 py-2 rounded-r-md hover:bg-warning focus:outline-none"
                 >
                   <Icon icon="material-symbols:delete" />
