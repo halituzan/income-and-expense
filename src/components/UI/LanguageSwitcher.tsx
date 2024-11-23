@@ -19,7 +19,7 @@ const LanguageSwitcher = ({ open }: { open: boolean }) => {
     return (
         <button
             onClick={() => updateLanguage(params.locale === "en" ? "tr" : "en")}
-            className="flex items-center justify-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-primary/50 transition-colors duration-200"
+            className="flex items-center justify-start p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-slate-800 w-full transition-colors duration-200"
             aria-label="Toggle language"
         >
             <Icon

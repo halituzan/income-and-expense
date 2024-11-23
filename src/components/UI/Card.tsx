@@ -11,7 +11,7 @@ type CardProps = {
 
 };
 
-const Card = ({ children, shadow = "md", bg = "white", rounded = "lg", p = 6 }: CardProps) => {
+const Card = ({ children, shadow = "md", bg = "slate-100", rounded = "lg", p = 6 }: CardProps) => {
 
     return <div className={`flex flex-col md:flex-row items-center justify-center w-full shadow-${shadow} bg-${bg} dark:bg-primary p-${p} rounded-${rounded} `}>
         {children}

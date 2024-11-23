@@ -5,7 +5,7 @@ const ThemeSwitcher = ({ open }: { open: boolean }) => {
     return (
         <button
             onClick={toggleTheme}
-            className="flex items-center justify-center p-2 rounded-lg  hover:bg-gray-200 dark:hover:bg-primary/50 transition-colors duration-200"
+            className="flex items-center justify-start p-2 rounded-lg w-full hover:bg-gray-200 dark:hover:bg-slate-800 transition-colors duration-200"
             aria-label="Toggle theme"
         >
             {theme === 'light' ? (

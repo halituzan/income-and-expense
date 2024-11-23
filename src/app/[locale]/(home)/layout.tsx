@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Poppins } from "next/font/google";
@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   title: "Income And Expense Web Application",
   description: "Web application that lets you track your income and expenses.",
 };
+export function generateViewport({ params }:any) {
+  return {
+    themeColor: "red"
+  }
+}
 
 const LocaleLayout = async ({
   children,

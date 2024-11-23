@@ -19,6 +19,7 @@ const BottomBar = (props: Props) => {
           const isCurrentPath = `/${locale}${item.path}`;
           return (
             <Link
+              key={item.id}
               href={isCurrentPath}
               className={`bg-slate-100 dark:bg-slate-800 min-w-[60px] min-h-[60px] flex justify-center items-center rounded-full ${pathname === isCurrentPath ? "animate-menuFadeUp -translate-y-8 border-4 border-white dark:border-primary" : ""}`}
             >
@@ -30,6 +31,17 @@ const BottomBar = (props: Props) => {
             </Link>
           );
         })}
+        <Link
+          href={`/${locale}/settings`}
+          className={`bg-slate-100 dark:bg-slate-800 min-w-[60px] min-h-[60px] flex justify-center items-center rounded-full ${pathname === `/${locale}/settings` ? "animate-menuFadeUp -translate-y-8 border-4 border-white dark:border-primary" : ""}`}
+        >
+          <Icon
+            icon={"mdi:settings-outline"}
+            fontSize={32}
+            className='text-primary dark:text-slate-100'
+          />
+        </Link>
+
       </div>
     </div>
   );

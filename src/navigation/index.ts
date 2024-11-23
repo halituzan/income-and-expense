@@ -21,7 +21,7 @@ const navigation = [
     position: "start",
   },
   {
-    id: "9",
+    id: "4",
     label: "items",
     path: "/expenditure-items",
     icon: "mdi:invoice-line-items",
