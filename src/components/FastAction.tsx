@@ -53,6 +53,7 @@ const FastAction = (props: Props) => {
         categoryId: categoryId ?? "",
         date: date ?? "",
         description: description ?? "",
+        createdAt: new Date()
       };
       const data = setExpense(newExpense);
       const expensesData = getExpense();
@@ -67,6 +68,7 @@ const FastAction = (props: Props) => {
         categoryId: categoryId ?? "",
         date,
         description: description ?? "",
+        createdAt: new Date()
       };
       const data = setIncome(newIncome);
       const incomeData = getIncome();

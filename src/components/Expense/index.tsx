@@ -10,12 +10,12 @@ import {
 import getExpensesCategories from "@/services/Categories/getExpensesCategories";
 import getExpense from "@/services/Expense/getExpense";
 import setExpense from "@/services/Expense/setExpense";
+import { Category, ExpenseItem } from "@/types";
+import { useTranslations } from "next-intl";
 import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import HistoriesAddAction from "../HistoriesAddAction";
-import { useTranslations } from "next-intl";
-import { Category, ExpenseItem, FormProps } from "@/types";
 
 const Expense: FC = () => {
   const t = useTranslations("Expense")
@@ -33,12 +33,13 @@ const Expense: FC = () => {
   const addExpense = (e: React.FormEvent) => {
     e.preventDefault();
     if (amount && categoryId) {
-      const newExpense: FormProps = {
+      const newExpense: ExpenseItem = {
         id: uuidv4(),
         amount: parseFloat(amount),
         categoryId,
         date,
-        description: description ?? ""
+        description: description ?? "",
+        createdAt: new Date()
       };
       const data = setExpense(newExpense);
       const expensesData = getExpense();
@@ -60,7 +61,7 @@ const Expense: FC = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <HistoriesAddAction buttonColor={"expenses"} buttonText={tf("Income.button")} values={expenseValues} categoryData={expenseCategories} dispatchHandler={dispatchHandler} addAction={addExpense} title={t("title")} />
+      <HistoriesAddAction buttonColor={"expenses"} buttonText={tf("Expense.button")} values={expenseValues} categoryData={expenseCategories} dispatchHandler={dispatchHandler} addAction={addExpense} title={t("title")} />
 
 
       <div className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'>

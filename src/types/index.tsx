@@ -5,6 +5,7 @@ export interface ExpenseItem {
     id?: string;
     description?: string
     categoryId?: string
+    createdAt?: Date
 }
 export interface Category {
     id?: string;
@@ -25,6 +26,7 @@ export interface FormProps {
     date: string;
     category?: Category;
     description: string
+    createdAt?: Date
 }
 
 export interface NavigationProps {
