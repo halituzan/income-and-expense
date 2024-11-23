@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import "../../globals.css";
 import { Icon } from "@iconify/react";
 import StoreProvider from "./StoreProvider";
+import BottomBar from "@/components/Mobile/BottomBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,19 +28,18 @@ const LocaleLayout = async ({
   const messages = await getMessages();
   return (
     <html lang={locale}>
-      <body className={poppins.className}>
+      <body className={poppins.className + " bg-white dark:bg-primary/80"}>
         <div className='min-h-screen flex flex-col md:flex-row justify-between relative'>
           <NextIntlClientProvider messages={messages}>
             <StoreProvider>
               <aside className='hidden md:block'>
                 <Sidebar />
               </aside>
-              <main className='flex-1 w-full py-4 overflow-y-auto h-screen bg-white dark:bg-primary/80'>
+              <main className='flex-1 w-full py-4 overflow-y-auto h-screen bg-white dark:bg-transparent'>
                 {children}
               </main>
-              <div className='mobile-navbar sticky bottom-0 w-full h-10 bg-white dark:bg-primary shadow-lg shadow-primary dark:shadow-white flex md:hidden justify-center'>
-                <div>asd</div>
-                <div>asd</div>
+              <div className='z-50 mobile-navbar sticky bottom-0 w-full h-[60px] rounded-t-2xl bg-slate-100  dark:bg-slate-800 shadow-lg shadow-primary dark:shadow-white flex md:hidden items-center px-2'>
+                <BottomBar />
               </div>
             </StoreProvider>
           </NextIntlClientProvider>

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className=''>
       <HomePage />
-      <button onClick={() => setOpenAction(!openAction)} className='fixed right-2 md:right-6 bottom-12 md:bottom-4 cursor-pointer bg-primary hover:bg-primary/80 rounded-full flex justify-center items-center h-10 min-w-10 group dark:bg-slate-100 dark:hover:bg-slate-200'>
+      <button onClick={() => setOpenAction(!openAction)} className='fixed right-2 md:right-6 bottom-[70px] md:bottom-4 cursor-pointer bg-primary hover:bg-primary/80 rounded-full flex justify-center items-center h-10 min-w-10 group dark:bg-slate-100 dark:hover:bg-slate-200'>
         <Icon
           icon='mdi:interaction-double-tap'
           fontSize={30}

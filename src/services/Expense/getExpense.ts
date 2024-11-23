@@ -10,7 +10,10 @@ export default () => {
   const newData = parsedData.map((item: any) => {
     return {
       ...item,
-      category: expensesCategory.find((i: any) => i.id == item.categoryId),
+      category: expensesCategory.find((i: any) => i.id == item.categoryId) ?? {
+        name: "Tanımsız",
+        id: "undefined",
+      },
     };
   });
 

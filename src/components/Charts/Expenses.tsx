@@ -16,6 +16,7 @@ import {
   YAxis,
 } from "recharts";
 import useTheme from "../hooks/useTheme";
+import priceFormatter from "@/helpers/priceFormatter";
 
 const Expenses = () => {
   const { theme } = useTheme()
@@ -39,7 +40,6 @@ const Expenses = () => {
     }
     return acc;
   }, []);
-
 
   useEffect(() => {
     const expenseData = getExpense();

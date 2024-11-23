@@ -27,9 +27,18 @@ const config: Config = {
             transform: "translateY(0)",
           },
         },
+        "menu-fade-up": {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "10%": {
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         fadeInUp: "fade-in-up 0.2s",
+        menuFadeUp: "menu-fade-up 0.1s",
       },
     },
   },

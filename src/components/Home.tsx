@@ -4,13 +4,21 @@ import Expenses from "./Charts/Expenses";
 import Incomes from "./Charts/Incomes";
 import IncomesAndExpenses from "./Charts/IncomesAndExpenses";
 import Card from "./UI/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { selectExpenses, selectIncomes } from "@/lib/features/expenditure";
+import getTotalIncome from "@/services/Income/getTotalIncome";
+import getTotalExpense from "@/services/Expense/getTotalExpense";
+import priceFormatter from "@/helpers/priceFormatter";
 
 type Props = {};
 
 const HomePage = (props: Props) => {
   const t = useTranslations("Common");
 
-  const changeLanguage = (lng: any) => { };
+  const totalIncome = getTotalIncome()
+  const totalExpense = getTotalExpense()
+
+
 
   return (
     <div className='flex flex-col justify-center items-center max-w-7xl mx-auto px-4 w-full'>
@@ -22,7 +30,7 @@ const HomePage = (props: Props) => {
                 <h3 className='text-lg font-medium text-incomes/70  dark:text-white'>
                   Total Income
                 </h3>
-                <p className='text-2xl font-bold text-incomes dark:text-white'>$5,000</p>
+                <p className='text-2xl font-bold text-incomes dark:text-white'>{priceFormatter(totalIncome)}</p>
               </div>
             </div>
             <div className='col-span-12 md:col-span-6'>
@@ -30,7 +38,7 @@ const HomePage = (props: Props) => {
                 <h3 className='text-lg font-medium text-expenses/70 dark:text-white'>
                   Total Expenses
                 </h3>
-                <p className='text-2xl font-bold text-expenses  dark:text-white'>$3,500</p>
+                <p className='text-2xl font-bold text-expenses  dark:text-white'>{priceFormatter(totalExpense)}</p>
               </div>
             </div>
           </div>

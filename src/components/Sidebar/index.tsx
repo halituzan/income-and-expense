@@ -5,6 +5,7 @@ import navigation from "@/navigation";
 import VerticalMenuItems from "./VerticalMenu/VerticalMenuItems";
 import ThemeSwitcher from "../UI/ThemeSwitcher";
 import LanguageSwitcher from "../UI/LanguageSwitcher";
+import Link from "next/link";
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -22,7 +23,7 @@ const Sidebar = () => {
     >
       <div className="flex flex-col">
         <div className='flex items-center justify-center w-full mb-5'>
-          <h2 className='text-xl font-bold flex-1'>Logo</h2>
+          <Link href={"/"} className='text-xl font-bold flex-1 text-primary dark:text-slate-50'>IAEX</Link>
         </div>
         <div className='flex flex-col items-start justify-between h-full self-stretch'>
           {navigation.map((item) => {
