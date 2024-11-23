@@ -25,7 +25,8 @@
         "description": "Description",
         "category": "Category",
         "selectCategory": "Select Category",
-        "spendTime": "Spend Time"
+        "spendTime": "Spend Time",
+        "limit": "Limit"
     },
     "Expense": {
         "title": "Add New Expense",

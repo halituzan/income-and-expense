@@ -91,7 +91,7 @@ const Incomes = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <HistoriesAddAction buttonColor={"incomes"} buttonText={tf("Income.button")} title={t("title")} values={expenseValues} categoryData={incomesCategories} dispatchHandler={dispatchHandler} addAction={addIncome} />
+      <HistoriesAddAction isLimit={false} buttonColor={"incomes"} buttonText={tf("Income.button")} title={t("title")} values={expenseValues} categoryData={incomesCategories} dispatchHandler={dispatchHandler} addAction={addIncome} />
 
       <div className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'>
         <div className='flex flex-col md:flex-row justify-between items-center w-full mb-2'>

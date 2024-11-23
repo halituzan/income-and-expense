@@ -6,6 +6,7 @@ export interface ExpenseItem {
     description?: string
     categoryId?: string
     createdAt?: Date
+    limit?: string
 }
 export interface Category {
     id?: string;

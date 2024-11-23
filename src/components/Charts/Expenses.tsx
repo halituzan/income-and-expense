@@ -1,6 +1,7 @@
 "use client";
 import { selectExpenses, setExpenses } from "@/lib/features/expenditure";
 import getExpense from "@/services/Expense/getExpense";
+import { FormattedData } from "@/types";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,6 @@ import {
   YAxis,
 } from "recharts";
 import useTheme from "../hooks/useTheme";
-import { Category, FormattedData } from "@/types";
 
 const Expenses = () => {
   const { theme } = useTheme();

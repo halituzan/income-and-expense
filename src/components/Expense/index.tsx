@@ -27,7 +27,7 @@ const Expense: FC = () => {
   const dispatch = useDispatch();
   const expenses = useSelector(selectExpenses);
   const expenseValues = useSelector(selectExpenseValues);
-  const { amount, categoryId, date, description } = expenseValues;
+  const { amount, categoryId, date, description, limit } = expenseValues;
   const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
   const [dateRange, setDateRange] = useState<Date[] | undefined[]>([undefined, undefined]);
   const [sort, setSort] = useState<"asc" | "desc" | null>(null);
@@ -51,7 +51,8 @@ const Expense: FC = () => {
         categoryId,
         date,
         description: description ?? "",
-        createdAt: new Date()
+        createdAt: new Date(),
+        limit
       };
       const data = setExpense(newExpense);
       const expensesData = getExpense();
@@ -92,7 +93,7 @@ const Expense: FC = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <HistoriesAddAction buttonColor={"expenses"} buttonText={tf("Expense.button")} values={expenseValues} categoryData={expenseCategories} dispatchHandler={dispatchHandler} addAction={addExpense} title={t("title")} />
+      <HistoriesAddAction buttonColor={"expenses"} buttonText={tf("Expense.button")} values={expenseValues} categoryData={expenseCategories} dispatchHandler={dispatchHandler} addAction={addExpense} title={t("title")} isLimit={true} />
 
       <div className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'>
         <div className='flex flex-col md:flex-row justify-between items-center w-full mb-2'>

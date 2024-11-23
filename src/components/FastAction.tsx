@@ -135,7 +135,7 @@ const FastAction = (props: Props) => {
                 dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
               }
             }}
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-primary dark:placeholder:text-slate-100'
             required
           />
         </div>
@@ -156,7 +156,7 @@ const FastAction = (props: Props) => {
                 dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
               }
             }}
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-primary dark:placeholder:text-slate-100'
             required
           />
         </div>
@@ -176,7 +176,7 @@ const FastAction = (props: Props) => {
                 dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
               }
             }}
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-primary dark:placeholder:text-slate-100'
             required
           >
             <option value=''>{t("selectCategory")}</option>
@@ -212,7 +212,7 @@ const FastAction = (props: Props) => {
                 dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
               }
             }}
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary  dark:text-white placeholder:text-primary dark:placeholder:text-slate-100'
             required
           />
         </div>

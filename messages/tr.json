@@ -25,7 +25,8 @@
         "description": "Açıklama",
         "category": "Kategori",
         "selectCategory": "Kategori Seçin",
-        "spendTime": "Harcama Zamanı"
+        "spendTime": "Harcama Zamanı",
+        "limit": "Limit"
     },
     "Expense": {
         "title": "Yeni Harcama Ekle",

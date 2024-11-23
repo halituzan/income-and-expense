@@ -7,6 +7,7 @@ export interface ExpenditureValues {
   date?: any;
   description?: string;
   id?: string;
+  limit?: string;
 }
 
 export interface ExpenditureState {
