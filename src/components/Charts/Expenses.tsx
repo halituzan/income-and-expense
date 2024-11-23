@@ -58,6 +58,8 @@ const Expenses = () => {
     []
   );
 
+
+
   useEffect(() => {
     const expenseData = getExpense();
     dispatch(setExpenses(expenseData));

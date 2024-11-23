@@ -18,6 +18,7 @@ import {
     YAxis
 } from 'recharts';
 import useTheme from '../hooks/useTheme';
+import sortByDate from '@/helpers/sortByDate';
 
 
 const IncomesAndExpenses = () => {
@@ -31,6 +32,7 @@ const IncomesAndExpenses = () => {
         (item: any) => {
             return {
                 name: dateToMonth(item.date) as string,
+                date: item.date,
                 id: item.category.id,
                 [t("Income.tableName")]: item.amount,
             };
@@ -38,6 +40,7 @@ const IncomesAndExpenses = () => {
     const formatExpenseData: FormattedData[] = expense.map((item: any) => {
         return {
             name: dateToMonth(item.date) as string,
+            date: item.date,
             id: item.category.id,
             [t("Expense.tableName")]: - item.amount,
         };
@@ -45,38 +48,48 @@ const IncomesAndExpenses = () => {
     const concatData: FormattedData[] = [...formatIncomeData, ...formatExpenseData]
 
     const groupedData = concatData.reduce((acc: FormattedData[], current: FormattedData) => {
-        const existingItem = acc.find(
-            (item: FormattedData) => item.name === current.name
-        ) as FormattedData
+        // Yıl ve ayı birlikte kontrol etmek için bir anahtar oluştur
+        const groupKey = `${current.name}-${new Date(current.date).getFullYear()}-${new Date(current.date).getMonth()}`;
+
+        // Grupta aynı key'e sahip bir öğe var mı?
+        const existingItem = acc.find((item: FormattedData) => item.groupKey === groupKey);
 
         if (existingItem) {
             const currentIncomeAmount = current[t("Income.tableName")];
             const existingIncomeAmount = existingItem[t("Income.tableName")];
             const currentExpenseAmount = current[t("Expense.tableName")];
             const existingExpenseAmount = existingItem[t("Expense.tableName")];
-            if (
-                typeof existingIncomeAmount === "number" &&
-                typeof currentIncomeAmount === "number"
 
-            ) {
+            // Gelir değerlerini birleştir
+            if (typeof existingIncomeAmount === "number" && typeof currentIncomeAmount === "number") {
                 existingItem[t("Income.tableName")] = existingIncomeAmount + currentIncomeAmount;
             }
 
-            if (typeof existingExpenseAmount === "number" &&
-                typeof currentExpenseAmount === "number") {
+            // Gider değerlerini birleştir
+            if (typeof existingExpenseAmount === "number" && typeof currentExpenseAmount === "number") {
                 existingItem[t("Expense.tableName")] = existingExpenseAmount + currentExpenseAmount;
             }
-
         } else {
+            // Yeni bir grup oluştur
             acc.push({
                 id: current.id,
+                groupKey, // Yeni key ekle (gruplama için)
                 name: current.name,
+                date: current.date,
                 [t("Income.tableName")]: current[t("Income.tableName")] || 0,
                 [t("Expense.tableName")]: current[t("Expense.tableName")] || 0,
             });
         }
         return acc;
-    }, []);
+    }, []).map(item => {
+        // Gruplama anahtarını kaldırarak temiz bir çıktı oluştur
+        const { groupKey, ...rest } = item;
+        return rest;
+    });
+
+
+    const sortingData = sortByDate(groupedData)
+
 
     useEffect(() => {
         const expenseData = getExpense();
@@ -90,7 +103,7 @@ const IncomesAndExpenses = () => {
             <BarChart
                 width={500}
                 height={300}
-                data={groupedData}
+                data={sortingData.slice(0, 12)}
                 stackOffset="sign"
                 margin={{
                     top: 5,
@@ -105,8 +118,8 @@ const IncomesAndExpenses = () => {
                 <Tooltip />
                 <Legend />
                 <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey={t("Expense.tableName")} fill="#059669" stackId="stack" />
-                <Bar dataKey={t("Income.tableName")} fill="#f87171" stackId="stack" />
+                <Bar dataKey={t("Income.tableName")} fill="#059669" stackId="stack" />
+                <Bar dataKey={t("Expense.tableName")} fill="#f87171" stackId="stack" />
             </BarChart>
         </ResponsiveContainer>
     );
