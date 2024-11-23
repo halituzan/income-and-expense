@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 type Props = {
   values: any;
@@ -19,6 +20,7 @@ const HistoriesAddAction = ({
   buttonText,
   buttonColor,
 }: Props) => {
+  const t = useTranslations("Form")
   const { amount, categoryId, date, description } = values;
   const [categories, setCategories] = useState<any>([]);
 
@@ -35,13 +37,13 @@ const HistoriesAddAction = ({
             htmlFor='amount'
             className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
-            Miktar
+            {t("amount")}
           </label>
           <input
             type='number'
             id='amount'
             name='amount'
-            placeholder='Miktar'
+            placeholder={t("amount")}
             value={amount}
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
@@ -55,7 +57,7 @@ const HistoriesAddAction = ({
             htmlFor='categoryId'
             className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
-            Kategori
+            {t("category")}
           </label>
           <select
             id='categoryId'
@@ -67,7 +69,7 @@ const HistoriesAddAction = ({
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           >
-            <option value=''>Kategori Seçin</option>
+            <option value=''>{t("selectCategory")}</option>
             {categories.map((cat: any) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -80,7 +82,7 @@ const HistoriesAddAction = ({
             htmlFor='date'
             className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
-            Gelir Zamanı
+            {t("spendTime")}
           </label>
           <input
             type='date'
@@ -99,12 +101,12 @@ const HistoriesAddAction = ({
             htmlFor='description'
             className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
-            Açıklama
+            {t("description")}
           </label>
           <textarea
             id='description'
             name='description'
-            placeholder='Açıklama'
+            placeholder={t("description")}
             value={description}
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)

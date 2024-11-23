@@ -16,6 +16,7 @@ import getExpense from "@/services/Expense/getExpense";
 import setExpense from "@/services/Expense/setExpense";
 import getIncome from "@/services/Income/getIncome";
 import setIncome from "@/services/Income/setIncome";
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -35,6 +36,7 @@ type Props = {};
 
 const FastAction = (props: Props) => {
   const dispatch = useDispatch();
+  const t = useTranslations("Form");
   const expenseValues = useSelector(selectExpenseValues);
   const incomeValues = useSelector(selectIncomeValues);
 
@@ -105,7 +107,7 @@ const FastAction = (props: Props) => {
           className={`col-span-1 h-8 rounded-l-md transition-all delay-100 ${tab == "income" ? "bg-primary dark:bg-slate-900 text-white" : ""
             }`}
         >
-          Gelir
+          {t("Income.name")}
         </button>
         <button
           onClick={() => {
@@ -115,7 +117,7 @@ const FastAction = (props: Props) => {
           className={`col-span-1 h-8 rounded-r-md transition-all delay-100 ${tab == "expense" ? "bg-primary dark:bg-slate-900 text-white" : ""
             }`}
         >
-          Gider
+          {t("Expense.name")}
         </button>
       </div>
       <form
@@ -127,13 +129,13 @@ const FastAction = (props: Props) => {
             htmlFor='amount'
             className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
-            Miktar
+            {t("amount")}
           </label>
           <input
             type='number'
             id='amount'
             name='amount'
-            placeholder='Miktar'
+            placeholder={t("amount")}
             value={amount}
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
@@ -147,12 +149,12 @@ const FastAction = (props: Props) => {
             htmlFor='description'
             className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
-            Açıklama
+            {t("description")}
           </label>
           <textarea
             id='description'
             name='description'
-            placeholder='Açıklama'
+            placeholder={t("description")}
             value={description}
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
@@ -166,7 +168,7 @@ const FastAction = (props: Props) => {
             htmlFor='categoryId'
             className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
-            Kategori
+            {t("category")}
           </label>
           <select
             id='categoryId'
@@ -178,7 +180,7 @@ const FastAction = (props: Props) => {
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           >
-            <option value=''>Kategori Seçin</option>
+            <option value=''>{t("selectCategory")}</option>
             {tab == "expense" &&
               expenseCategories.map((cat: any) => (
                 <option key={cat.id} value={cat.id}>
@@ -198,7 +200,7 @@ const FastAction = (props: Props) => {
             htmlFor='date'
             className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
-            Harcama Zamanı
+            {t("spendTime")}
           </label>
           <input
             type='date'
@@ -219,14 +221,14 @@ const FastAction = (props: Props) => {
               type='submit'
               className='w-full bg-expenses h-12 text-white px-4 py-2 rounded-md hover:bg-expenses/80 '
             >
-              Harcama Ekle
+              {t("Income.button")}
             </button>
           ) : (
             <button
               type='submit'
               className='w-full bg-incomes h-12 text-white px-4 py-2 rounded-md hover:bg-incomes/80 '
             >
-              Gelir Ekle
+              {t("Expense.button")}
             </button>
           )}
         </div>

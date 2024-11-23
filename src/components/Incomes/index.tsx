@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import DateRangePicker from "../UI/DateRangePicker";
 import HistoriesAddAction from "../HistoriesAddAction";
+import { useTranslations } from "next-intl";
 type IncomeProps = {
   id: string;
   amount: number;
@@ -28,9 +29,11 @@ type CategoryProps = {
   name: string;
 };
 const Incomes = () => {
+  const t = useTranslations("Income")
+  const tf = useTranslations("Form")
   const dispatch = useDispatch();
   const incomes = useSelector(selectIncomes);
-  
+
   const expenseValues = useSelector(selectIncomeValues);
   const { amount, categoryId, date, description } = expenseValues;
   const [incomesCategories, setIncomesCategories] = useState<any>([]);
@@ -69,11 +72,11 @@ const Incomes = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <HistoriesAddAction buttonColor={"incomes"} buttonText="Gelir Ekle" title="Yeni Gelir Ekle" values={expenseValues} categoryData={incomesCategories} dispatchHandler={dispatchHandler} addAction={addIncome} />
+      <HistoriesAddAction buttonColor={"incomes"} buttonText={tf("Expense.button")} title={t("title")} values={expenseValues} categoryData={incomesCategories} dispatchHandler={dispatchHandler} addAction={addIncome} />
 
       <div className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'>
         <div className='flex flex-col md:flex-row justify-between items-center w-full mb-2'>
-          <h2 className='text-2xl font-semibold mb-4 text-primary dark:text-slate-50'>Gelir Geçmişi</h2>
+          <h2 className='text-2xl font-semibold mb-4 text-primary dark:text-slate-50'>{t("history")}</h2>
           <DateRangePicker />
         </div>
 

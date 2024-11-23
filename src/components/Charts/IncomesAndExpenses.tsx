@@ -16,11 +16,13 @@ import {
     YAxis
 } from 'recharts';
 import useTheme from '../hooks/useTheme';
+import { useTranslations } from 'next-intl';
 
 
 
 const IncomesAndExpenses = () => {
     const { theme } = useTheme()
+    const t = useTranslations("Home");
     const axisColor = theme === "dark" ? "#ffffff" : "#475569";
     const dispatch = useDispatch();
     const income = useSelector(selectIncomes);
@@ -29,14 +31,14 @@ const IncomesAndExpenses = () => {
         return {
             name: dateToMonth(item.date),
             id: item.category.id,
-            income: item.amount,
+            [t("Income.tableName")]: item.amount,
         };
     });
     const formatExpenseData = expense.map((item: any) => {
         return {
             name: dateToMonth(item.date),
             id: item.category.id,
-            expense: - item.amount,
+            [t("Expense.tableName")]: - item.amount,
         };
     });
     const concatData = [...formatIncomeData, ...formatExpenseData]
@@ -44,13 +46,13 @@ const IncomesAndExpenses = () => {
     const groupedData = concatData.reduce((acc: any, current: any) => {
         const existingItem = acc.find((item: any) => item.name === current.name);
         if (existingItem) {
-            existingItem.income = (existingItem.income || 0) + (current.income || 0);
-            existingItem.expense = (existingItem.expense || 0) + (current.expense || 0);
+            existingItem[t("Income.tableName")] = (existingItem[t("Income.tableName")] || 0) + (current[t("Income.tableName")] || 0);
+            existingItem[t("Expense.tableName")] = (existingItem[t("Expense.tableName")] || 0) + (current[t("Expense.tableName")] || 0);
         } else {
             acc.push({
                 name: current.name,
-                income: current.income || 0,
-                expense: current.expense || 0,
+                [t("Income.tableName")]: current[t("Income.tableName")] || 0,
+                [t("Expense.tableName")]: current[t("Expense.tableName")] || 0,
             });
         }
         return acc;
@@ -85,8 +87,8 @@ const IncomesAndExpenses = () => {
                 <Tooltip />
                 <Legend />
                 <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey="income" fill="#059669" stackId="stack" />
-                <Bar dataKey="expense" fill="#f87171" stackId="stack" />
+                <Bar dataKey={t("Expense.tableName")} fill="#059669" stackId="stack" />
+                <Bar dataKey={t("Income.tableName")} fill="#f87171" stackId="stack" />
             </BarChart>
         </ResponsiveContainer>
     );

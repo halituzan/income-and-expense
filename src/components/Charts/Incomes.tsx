@@ -1,23 +1,24 @@
 "use client";
 import { selectIncomes, setIncomes } from "@/lib/features/expenditure";
-import React, { useEffect } from "react";
+import getIncome from "@/services/Income/getIncome";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
   Rectangle,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from "recharts";
-import getIncome from "@/services/Income/getIncome";
-import dateToMonth from "@/helpers/dateToMonth";
 import useTheme from "../hooks/useTheme";
 
 const Incomes = () => {
+  const t = useTranslations("Home");
   const { theme } = useTheme()
   const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Incomes = () => {
     return {
       name: item.category.name,
       id: item.category.id,
-      income: item.amount,
+      [t("Income.tableName")]: item.amount,
     };
   });
 
@@ -62,7 +63,7 @@ const Incomes = () => {
         <YAxis tick={{ fill: axisColor }} />
         <Tooltip />
         <Legend />
-        <Bar dataKey='income' fill='#059669' activeBar={<Rectangle />} />
+        <Bar dataKey={t("Income.tableName")} fill='#059669' activeBar={<Rectangle />} />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -1,18 +1,53 @@
 {
-    "Common": {
-        "title": "Kalbiniz kadar temiz bir Next.js projesi.",
-        "content": "# Hazır Kurulumlar",
-        "stageManagement": "state yönetimi kullanıldı.",
-        "cssLibrary": "CSS kütüphanesi kullanıldı",
-        "iconLibrary": "icon kütüphanesi kullanıldı.",
-        "localization": "ile dil yapılandırması yapıldı.",
-        "english": "İngilizce",
-        "turkish": "Türkçe",
-        "selectLanguage": "Dil seçin"
+    "Home": {
+        "Income": {
+            "total": "Toplam Gelir",
+            "statistics": "Gelir Tablosu",
+            "tableName": "Gelir"
+        },
+        "Expense": {
+            "total": "Toplam Gider",
+            "statistics": "Gider Tablosu",
+            "tableName": "Gider"
+        },
+        "speedAction": "Hızlı İşlem"
+    },
+    "Form": {
+        "Income": {
+            "name": "Gelir",
+            "button": "Gelir Ekle"
+        },
+        "Expense": {
+            "name": "Gider",
+            "button": "Gider Ekle"
+        },
+        "amount": "Miktar",
+        "description": "Açıklama",
+        "category": "Kategori",
+        "selectCategory": "Kategori Seçin",
+        "spendTime": "Harcama Zamanı"
+    },
+    "Expense": {
+        "title": "Yeni Harcama Ekle",
+        "history": "Harcama Geçmişi",
+        "noData": "Henüz harcama kaydı bulunmamaktadır."
+    },
+    "Income": {
+        "title": "Yeni Gelir Ekle",
+        "history": "Gelir Geçmişi",
+        "noData": "Henüz harcama kaydı bulunmamaktadır."
+    },
+    "Expenditure": {
+        "incomes": "Gelir Kalemleri",
+        "expenses": "Gider Kalemleri",
+        "add": "Ekle",
+        "newIncome": "Yeni Gelir Kalemi",
+        "newExpense": "Yeni Gider Kalemi"
     },
     "Sidebar": {
         "home": "Ana Sayfa",
         "incomes": "Gelirler",
-        "expenses": "Giderler"
+        "expenses": "Giderler",
+        "items": "Gelir Gider Kalemleri"
     }
 }

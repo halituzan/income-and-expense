@@ -1,18 +1,53 @@
 {
-    "Common": {
-        "title": "A Next.js project as clean as your heart.",
-        "content": "# Ready Installations",
-        "stageManagement": "State management is utilized.",
-        "cssLibrary": "A CSS library is used.",
-        "iconLibrary": "An icon library is used.",
-        "localization": "Localization is configured.",
-        "english": "English",
-        "turkish": "Turkish",
-        "selectLanguage": "Select an language"
+    "Home": {
+        "Income": {
+            "total": "Total Income",
+            "statistics": "Income Statistics",
+            "tableName": "Income"
+        },
+        "Expense": {
+            "total": "Total Income",
+            "statistics": "Expense Statistics",
+            "tableName": "Expense"
+        },
+        "speedAction": "Speed Action"
+    },
+    "Form": {
+        "Income": {
+            "name": "Income",
+            "button": "Add Income"
+        },
+        "Expense": {
+            "name": "Expense",
+            "button": "Add Expense"
+        },
+        "amount": "Amount",
+        "description": "Description",
+        "category": "Category",
+        "selectCategory": "Select Category",
+        "spendTime": "Spend Time"
+    },
+    "Expense": {
+        "title": "Add New Expense",
+        "history": "Expense History",
+        "noData": "Henüz harcama kaydı bulunmamaktadır."
+    },
+    "Income": {
+        "title": "Add New Income",
+        "history": "Income History",
+        "noData": "Henüz harcama kaydı bulunmamaktadır."
+    },
+    "Expenditure": {
+        "incomes": "Incomes Categories",
+        "expenses": "Expenses Categories",
+        "add": "Add",
+        "newIncome": "New Income Category",
+        "newExpense": "New Expense Category"
     },
     "Sidebar": {
         "home": "Home",
-        "incomes": "Incomes",
-        "expenses": "Expenses"
+        "incomes": "Incomes History",
+        "expenses": "Expenses History",
+        "items": "Income and expense items"
     }
 }

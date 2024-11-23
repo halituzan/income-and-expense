@@ -2,27 +2,23 @@
 import getExpensesCategories from '@/services/Categories/getExpensesCategories';
 import getIncomesCategories from '@/services/Categories/getIncomesCategories';
 import dbName from '@/services/dbNames';
+import { Category } from '@/types';
 import { Icon } from "@iconify/react";
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-type Category = {
-  id: string;
-  name: string;
-};
 
+const { expensesCategory, incomeCategory } = dbName;
 export default function CategoryManager() {
+  const t = useTranslations("Expenditure")
+  //? States
   const [incomeCategories, setIncomeCategories] = useState<Category[]>([]);
   const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
   const [newIncomeCategory, setNewIncomeCategory] = useState('');
   const [newExpenseCategory, setNewExpenseCategory] = useState('');
-  const { expensesCategory, incomeCategory } = dbName;
-  useEffect(() => {
-    const incomeData = getIncomesCategories()
-    const expensesData = getExpensesCategories()
-    setIncomeCategories(incomeData)
-    setExpenseCategories(expensesData)
-  }, []);
+  //? States
 
+  //? Fonktions
   const addCategory = (type: 'income' | 'expense') => {
     if (type === 'income' && newIncomeCategory.trim() !== '') {
       const oldData = getIncomesCategories()
@@ -54,26 +50,38 @@ export default function CategoryManager() {
     }
   };
 
+  //? Fonktions
+
+  //? Hooks
+  useEffect(() => {
+    const incomeData = getIncomesCategories()
+    const expensesData = getExpensesCategories()
+    setIncomeCategories(incomeData)
+    setExpenseCategories(expensesData)
+  }, []);
+  //? Hooks
   return (
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Gelir Kategorileri */}
         <div className="bg-incomes/10 dark:bg-incomes p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4 text-incomes dark:text-slate-100">Incomes</h2>
+          <h2 className="text-xl font-semibold mb-4 text-incomes dark:text-slate-100">
+            {t("incomes")}
+          </h2>
           <form onSubmit={(e) => { e.preventDefault(); addCategory("income"); }} className="mb-4">
             <div className="flex">
               <input
                 type="text"
                 value={newIncomeCategory}
                 onChange={(e) => setNewIncomeCategory(e.target.value)}
-                placeholder="Yeni gelir kalemi"
+                placeholder={t("newIncome")}
                 className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100"
               />
               <button
                 type="submit"
                 className="bg-incomes dark:bg-primary text-white px-4 py-2 rounded-r-md hover:bg-incomes dark:hover:bg-primary/80 focus:outline-none"
               >
-                Ekle
+                {t("add")}
               </button>
             </div>
           </form>
@@ -94,21 +102,21 @@ export default function CategoryManager() {
 
         {/* Gider Kategorileri */}
         <div className="bg-expenses/10 dark:bg-expenses p-4 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4 text-expenses dark:text-slate-100">Expenses</h2>
+          <h2 className="text-xl font-semibold mb-4 text-expenses dark:text-slate-100">{t("expenses")}</h2>
           <form onSubmit={(e) => { e.preventDefault(); addCategory('expense'); }} className="mb-4">
             <div className="flex">
               <input
                 type="text"
                 value={newExpenseCategory}
                 onChange={(e) => setNewExpenseCategory(e.target.value)}
-                placeholder="Yeni gider kalemi"
+                placeholder={t("newExpense")}
                 className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100"
               />
               <button
                 type="submit"
                 className="bg-expenses/80 dark:bg-primary text-white px-4 py-2 rounded-r-md hover:bg-expenses focus:outline-none"
               >
-                Ekle
+                {t("add")}
               </button>
             </div>
           </form>

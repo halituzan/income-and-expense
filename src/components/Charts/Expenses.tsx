@@ -1,7 +1,7 @@
 "use client"
 import { selectExpenses, setExpenses } from "@/lib/features/expenditure";
 import getExpense from "@/services/Expense/getExpense";
-import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,10 +16,10 @@ import {
   YAxis,
 } from "recharts";
 import useTheme from "../hooks/useTheme";
-import priceFormatter from "@/helpers/priceFormatter";
 
 const Expenses = () => {
   const { theme } = useTheme()
+  const t = useTranslations("Home");
   const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
   const expense = useSelector(selectExpenses)
@@ -27,7 +27,7 @@ const Expenses = () => {
     return {
       name: item.category.name,
       id: item.category.id,
-      expense: item.amount
+      [t("Expense.tableName")]: item.amount
     }
   })
 
@@ -65,7 +65,7 @@ const Expenses = () => {
         <YAxis tick={{ fill: axisColor }} />
         <Tooltip />
         <Legend />
-        <Bar dataKey='expense' fill="#f87171" activeBar={<Rectangle />} />
+        <Bar dataKey={t("Expense.tableName")} fill="#f87171" activeBar={<Rectangle />} />
       </BarChart>
     </ResponsiveContainer>
   );

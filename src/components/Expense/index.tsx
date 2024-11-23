@@ -14,6 +14,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import HistoriesAddAction from "../HistoriesAddAction";
+import { useTranslations } from "next-intl";
 type ExpenseProps = {
   id: string;
   amount: number;
@@ -27,6 +28,8 @@ type CategoryProps = {
   name: string;
 };
 const Expense: FC = () => {
+  const t = useTranslations("Expense")
+  const tf = useTranslations("Form")
   const dispatch = useDispatch();
   const expenses = useSelector(selectExpenses);
   const expenseValues = useSelector(selectExpenseValues);
@@ -67,13 +70,13 @@ const Expense: FC = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <HistoriesAddAction buttonColor={"expenses"} buttonText="Harcama Ekle" values={expenseValues} categoryData={expenseCategories} dispatchHandler={dispatchHandler} addAction={addExpense} title={"Yeni Harcama Ekle"} />
+      <HistoriesAddAction buttonColor={"expenses"} buttonText={tf("Income.button")} values={expenseValues} categoryData={expenseCategories} dispatchHandler={dispatchHandler} addAction={addExpense} title={t("title")} />
 
 
       <div className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'>
-        <h2 className='text-2xl font-semibold mb-4 text-primary dark:text-slate-50'>Harcama Geçmişi</h2>
+        <h2 className='text-2xl font-semibold mb-4 text-primary dark:text-slate-50'>{t("history")}</h2>
         {expenses.length === 0 ? (
-          <p className='text-primary dark:text-slate-50'>Henüz harcama kaydı bulunmamaktadır.</p>
+          <p className='text-primary dark:text-slate-50'>{t("noData")}</p>
         ) : (
           <ul className='space-y-4 divide-y'>
             {expenses.map((expense: any) => (
