@@ -8,10 +8,6 @@ export default () => {
   const expensesCategory = getExpensesCategories();
 
   const newData = parsedData.map((item: any) => {
-    console.log(
-      "expensesCategory.find",
-      expensesCategory.find((i: any) => i.id == item.categoryId)
-    );
     return {
       ...item,
       category: expensesCategory.find((i: any) => i.id == item.categoryId),

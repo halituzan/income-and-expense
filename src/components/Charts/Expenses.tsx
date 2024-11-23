@@ -1,56 +1,55 @@
-import React from "react";
+"use client"
+import { selectExpenses, setExpenses } from "@/lib/features/expenditure";
+import getExpense from "@/services/Expense/getExpense";
+import { format } from "date-fns";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
   Rectangle,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Page A",
-    gider: 2400,
-  },
-  {
-    name: "Page B",
-    gider: 1398,
-  },
-  {
-    name: "Page C",
-    gider: 9800,
-
-  },
-  {
-    name: "Page D",
-    gider: 3908,
-
-  },
-  {
-    name: "Page E",
-    gider: 4800,
-  },
-  {
-    name: "Page F",
-    gider: 3800,
-  },
-  {
-    name: "Page G",
-    gider: 4300,
-  },
-];
-
 const Expenses = () => {
+  const dispatch = useDispatch();
+  const expense = useSelector(selectExpenses)
+  const formatData = expense.map((item: any) => {
+    return {
+      name: item.category.name,
+      id: item.category.id,
+      expense: item.amount
+    }
+  })
+
+  const groupedData = formatData.reduce((acc: any, current: any) => {
+    const existingItem = acc.find((item: any) => item.id === current.id);
+    if (existingItem) {
+      existingItem.expense += current.expense;
+    } else {
+      acc.push(current);
+    }
+    return acc;
+  }, []);
+
+
+  useEffect(() => {
+    const expenseData = getExpense();
+    dispatch(setExpenses(expenseData));
+  }, []);
+
+
   return (
     <ResponsiveContainer width='100%' height='100%' >
       <BarChart
         width={500}
         height={300}
-        data={data}
+        data={groupedData}
 
         margin={{
           top: 5,
@@ -64,7 +63,7 @@ const Expenses = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey='gider' fill="#f87171" activeBar={<Rectangle />} />
+        <Bar dataKey='expense' fill="#f87171" activeBar={<Rectangle />} />
       </BarChart>
     </ResponsiveContainer>
   );

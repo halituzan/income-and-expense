@@ -30,6 +30,7 @@ type CategoryProps = {
 const Incomes = () => {
   const dispatch = useDispatch();
   const incomes = useSelector(selectIncomes);
+  
   const expenseValues = useSelector(selectIncomeValues);
   const { amount, categoryId, date, description } = expenseValues;
   const [incomesCategories, setIncomesCategories] = useState<any>([]);
