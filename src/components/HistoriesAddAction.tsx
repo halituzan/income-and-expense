@@ -27,13 +27,13 @@ const HistoriesAddAction = ({
   }, [categoryData]);
 
   return (
-    <div className='bg-white p-6 rounded-lg shadow-md mb-8'>
-      <h2 className='text-2xl font-semibold mb-4'>{title}</h2>
+    <div className='bg-slate-100 dark:bg-primary/50 p-6 rounded-lg shadow-md mb-8'>
+      <h2 className='text-2xl font-semibold mb-4 text-primary dark:text-slate-50'>{title}</h2>
       <form onSubmit={addAction} className=' grid grid-cols-12 gap-2 w-full'>
         <div className='col-span-12 md:col-span-4 mt-0'>
           <label
             htmlFor='amount'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
             Miktar
           </label>
@@ -46,14 +46,14 @@ const HistoriesAddAction = ({
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           />
         </div>
         <div className='col-span-12 md:col-span-4 mt-0'>
           <label
             htmlFor='categoryId'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
             Kategori
           </label>
@@ -64,7 +64,7 @@ const HistoriesAddAction = ({
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           >
             <option value=''>Kategori Seçin</option>
@@ -78,7 +78,7 @@ const HistoriesAddAction = ({
         <div className='col-span-12 md:col-span-4 mt-0'>
           <label
             htmlFor='date'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
             Gelir Zamanı
           </label>
@@ -90,14 +90,14 @@ const HistoriesAddAction = ({
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           />
         </div>
         <div className='col-span-12 md:col-span-8 mt-0'>
           <label
             htmlFor='description'
-            className='block text-sm font-medium text-gray-700'
+            className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
             Açıklama
           </label>
@@ -109,7 +109,7 @@ const HistoriesAddAction = ({
             onChange={(e: any) =>
               dispatchHandler(e.target.name, e.target.value)
             }
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm'
+            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           />
         </div>

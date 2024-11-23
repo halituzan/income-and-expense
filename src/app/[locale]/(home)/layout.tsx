@@ -34,10 +34,10 @@ const LocaleLayout = async ({
               <aside className='hidden md:block'>
                 <Sidebar />
               </aside>
-              <main className='flex-1 w-full py-4 overflow-y-auto h-screen'>
+              <main className='flex-1 w-full py-4 overflow-y-auto h-screen bg-white dark:bg-primary/80'>
                 {children}
               </main>
-              <div className='mobile-navbar sticky bottom-0 w-full h-10 bg-red-500 shadow-sm flex md:hidden justify-center'>
+              <div className='mobile-navbar sticky bottom-0 w-full h-10 bg-white dark:bg-primary shadow-lg shadow-primary dark:shadow-white flex md:hidden justify-center'>
                 <div>asd</div>
                 <div>asd</div>
               </div>
