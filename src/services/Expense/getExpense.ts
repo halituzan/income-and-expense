@@ -14,7 +14,5 @@ export default () => {
     };
   });
 
-  console.log("newData", newData);
-
   return newData;
 };

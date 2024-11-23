@@ -2,7 +2,6 @@
 import { selectIncomes, setIncomes } from "@/lib/features/expenditure";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { format } from "date-fns";
 import {
   BarChart,
   Bar,
@@ -15,6 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import getIncome from "@/services/Income/getIncome";
+import dateToMonth from "@/helpers/dateToMonth";
 
 const Incomes = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const Incomes = () => {
     return acc;
   }, []);
 
-  
   useEffect(() => {
     const incomesData = getIncome();
     dispatch(setIncomes(incomesData));

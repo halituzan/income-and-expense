@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import expenditureSlice from "./features/expenditure";
-
+import themeSlice from "./features/theme"
 export const makeStore = () => {
   return configureStore({
     reducer: {
       expenditure: expenditureSlice,
+      theme: themeSlice
     },
   });
 };

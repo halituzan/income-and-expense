@@ -13,7 +13,7 @@ const HomePage = (props: Props) => {
   const changeLanguage = (lng: any) => {};
 
   return (
-    <div className='flex flex-col justify-center items-center max-w-6xl mx-auto px-4 w-full'>
+    <div className='flex flex-col justify-center items-center max-w-7xl mx-auto px-4 w-full'>
       <div className='grid grid-cols-12 gap-4 w-full'>
         <div className='col-span-12 w-full'>
           <div className='grid grid-cols-12 gap-2'>

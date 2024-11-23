@@ -14,6 +14,7 @@ import getExpensesCategories from "@/services/Categories/getExpensesCategories";
 import getIncomesCategories from "@/services/Categories/getIncomesCategories";
 import getExpense from "@/services/Expense/getExpense";
 import setExpense from "@/services/Expense/setExpense";
+import getIncome from "@/services/Income/getIncome";
 import setIncome from "@/services/Income/setIncome";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,7 +76,7 @@ const FastAction = (props: Props) => {
         description,
       };
       const data = setIncome(newIncome);
-      const incomeData = getExpense();
+      const incomeData = getIncome();
 
       dispatch(setIncomes(incomeData));
       dispatch(clearIncomeValues());

@@ -10,9 +10,9 @@ const VerticalMenuItems = ({ open, item }: any) => {
   const isCurrentPath = `/${locale}${item.path}`
   return (
     <button
-      className={`my-1 p-2 rounded-md w-full flex justify-start items-center hover:font-bold hover:bg-primary/60 hover:text-white ${pathname === isCurrentPath
-        ? "bg-primary text-white font-bold"
-        : "bg-transparent text-primary"
+      className={`my-1 p-2 rounded-md w-full flex justify-start items-center hover:font-bold hover:bg-primary/60 hover:text-white dark:text-white ${pathname === isCurrentPath
+        ? "bg-primary text-white font-bold dark:bg-white dark:text-primary"
+        : "bg-transparent text-primary dark:text-white"
         }`}
       onClick={() => {
         router.push(isCurrentPath);
