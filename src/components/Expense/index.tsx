@@ -15,18 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import HistoriesAddAction from "../HistoriesAddAction";
 import { useTranslations } from "next-intl";
-type ExpenseProps = {
-  id: string;
-  amount: number;
-  categoryId: string;
-  date: any;
-  category?: CategoryProps;
-  description: string
-};
-type CategoryProps = {
-  id: string;
-  name: string;
-};
+import { Category, ExpenseItem, FormProps } from "@/types";
+
 const Expense: FC = () => {
   const t = useTranslations("Expense")
   const tf = useTranslations("Form")
@@ -34,21 +24,21 @@ const Expense: FC = () => {
   const expenses = useSelector(selectExpenses);
   const expenseValues = useSelector(selectExpenseValues);
   const { amount, categoryId, date, description } = expenseValues;
-  const [expenseCategories, setExpenseCategories] = useState<any>([]);
+  const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
 
-  const dispatchHandler = (key: keyof ExpenditureValues, value: any) => {
+  const dispatchHandler = (key: keyof ExpenditureValues, value: string) => {
     dispatch(setExpenseValues({ key: key, value: value }));
   };
 
   const addExpense = (e: React.FormEvent) => {
     e.preventDefault();
     if (amount && categoryId) {
-      const newExpense: ExpenseProps = {
+      const newExpense: FormProps = {
         id: uuidv4(),
         amount: parseFloat(amount),
         categoryId,
         date,
-        description
+        description: description ?? ""
       };
       const data = setExpense(newExpense);
       const expensesData = getExpense();
@@ -79,7 +69,7 @@ const Expense: FC = () => {
           <p className='text-primary dark:text-slate-50'>{t("noData")}</p>
         ) : (
           <ul className='space-y-4 divide-y'>
-            {expenses.map((expense: any) => (
+            {expenses.map((expense: ExpenseItem) => (
               <li key={expense.id} className='py-2'>
                 <div className='flex justify-between items-center'>
                   <div>

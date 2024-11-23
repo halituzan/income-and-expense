@@ -1,8 +1,9 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { NavigationProps } from "@/types";
 
-const VerticalMenuItems = ({ open, item }: any) => {
+const VerticalMenuItems = ({ open, item }: { open: boolean, item: NavigationProps }) => {
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()

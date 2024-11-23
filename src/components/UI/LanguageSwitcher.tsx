@@ -2,7 +2,7 @@
 import { Icon } from "@iconify/react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import useTheme from '../hooks/useTheme';
-const LanguageSwitcher = ({ open }: any) => {
+const LanguageSwitcher = ({ open }: { open: boolean }) => {
     const { theme, lang, toggleLanguage } = useTheme();
     const path = usePathname()
     const router = useRouter()

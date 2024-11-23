@@ -16,6 +16,7 @@ import {
   YAxis,
 } from "recharts";
 import useTheme from "../hooks/useTheme";
+import { Category, FormattedData } from "@/types";
 
 const Incomes = () => {
   const t = useTranslations("Home");
@@ -23,18 +24,25 @@ const Incomes = () => {
   const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
   const income = useSelector(selectIncomes);
-  const formatData = income.map((item: any) => {
-    return {
-      name: item.category.name,
-      id: item.category.id,
-      [t("Income.tableName")]: item.amount,
-    };
-  });
+  const formatData: FormattedData[] = income.map(
+    (item: { category: Category; amount: number }) => {
+      return {
+        name: item.category.name,
+        id: item.category.id,
+        [t("Income.tableName")]: item.amount,
+      };
+    }
+  );
 
-  const groupedData = formatData.reduce((acc: any, current: any) => {
-    const existingItem = acc.find((item: any) => item.id === current.id);
+  const groupedData = formatData.reduce((acc: FormattedData[], current: FormattedData) => {
+    const existingItem = acc.find((item: FormattedData) => item.id === current.id) as FormattedData;
+
     if (existingItem) {
-      existingItem.income += current.income;
+      const currentAmount = current[t("Income.tableName")];
+      const existingAmount = existingItem[t("Income.tableName")];
+      if (typeof existingAmount === "number" && typeof currentAmount === "number") {
+        existingItem[t("Income.tableName")] = existingAmount + currentAmount;
+      }
     } else {
       acc.push(current);
     }

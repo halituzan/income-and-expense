@@ -1,9 +1,8 @@
 "use client";
 import navigation from "@/navigation";
-import Link from "next/link";
-import React from "react";
+import { NavigationProps } from "@/types";
 import { Icon } from "@iconify/react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
 type Props = {};
@@ -16,7 +15,7 @@ const BottomBar = (props: Props) => {
   return (
     <div className='flex items-center w-full flex-1'>
       <div className='flex justify-evenly flex-1 w-full'>
-        {navigation.map((item: any) => {
+        {navigation.map((item: NavigationProps) => {
           const isCurrentPath = `/${locale}${item.path}`;
           return (
             <Link

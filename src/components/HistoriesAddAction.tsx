@@ -1,16 +1,18 @@
 "use client";
+import { ExpenditureValues } from "@/lib/features/expenditure";
+import { Category } from "@/types";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 type Props = {
-  values: any;
-  categoryData: any;
-  dispatchHandler: any;
-  addAction: any;
+  values: ExpenditureValues;
+  categoryData: Category[];
+  dispatchHandler: (key: keyof ExpenditureValues, value: string) => void;
+  addAction: (e: React.FormEvent) => void;
   title: string;
   buttonText: string;
   buttonColor: string;
 };
-
+const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description'];
 const HistoriesAddAction = ({
   values,
   categoryData,
@@ -22,7 +24,7 @@ const HistoriesAddAction = ({
 }: Props) => {
   const t = useTranslations("Form")
   const { amount, categoryId, date, description } = values;
-  const [categories, setCategories] = useState<any>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     setCategories(categoryData);
@@ -45,9 +47,11 @@ const HistoriesAddAction = ({
             name='amount'
             placeholder={t("amount")}
             value={amount}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           />
@@ -63,14 +67,16 @@ const HistoriesAddAction = ({
             id='categoryId'
             name='categoryId'
             value={categoryId}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           >
             <option value=''>{t("selectCategory")}</option>
-            {categories.map((cat: any) => (
+            {categories.map((cat: Category) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
               </option>
@@ -89,9 +95,11 @@ const HistoriesAddAction = ({
             id='date'
             name='date'
             value={date}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           />
@@ -108,9 +116,11 @@ const HistoriesAddAction = ({
             name='description'
             placeholder={t("description")}
             value={description}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
             required
           />

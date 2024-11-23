@@ -16,23 +16,14 @@ import getExpense from "@/services/Expense/getExpense";
 import setExpense from "@/services/Expense/setExpense";
 import getIncome from "@/services/Income/getIncome";
 import setIncome from "@/services/Income/setIncome";
+import { Category, ExpenseItem } from "@/types";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-type ExpenseProps = {
-  id: string;
-  amount: number;
-  categoryId: string;
-  date: any;
-  description: string;
-  category?: CategoryProps;
-};
-type CategoryProps = {
-  id: string;
-  name: string;
-};
+
 type Props = {};
+const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description'];
 
 const FastAction = (props: Props) => {
   const dispatch = useDispatch();
@@ -40,12 +31,12 @@ const FastAction = (props: Props) => {
   const expenseValues = useSelector(selectExpenseValues);
   const incomeValues = useSelector(selectIncomeValues);
 
-  const [expenseCategories, setExpenseCategories] = useState<any>([]);
-  const [incomeCategories, setIncomeCategories] = useState<any>([]);
+  const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
+  const [incomeCategories, setIncomeCategories] = useState<Category[]>([]);
   const [tab, setTab] = useState("income");
   const { amount, categoryId, date, description } =
     tab === "expense" ? expenseValues : incomeValues;
-  const dispatchHandler = (key: keyof ExpenditureValues, value: any) => {
+  const dispatchHandler = (key: keyof ExpenditureValues, value: string) => {
     if (tab === "expense") {
       dispatch(setExpenseValues({ key: key, value: value }));
     } else {
@@ -56,12 +47,12 @@ const FastAction = (props: Props) => {
   const addAction = (e: React.FormEvent) => {
     e.preventDefault();
     if (tab === "expense" && amount && categoryId) {
-      const newExpense: ExpenseProps = {
+      const newExpense: ExpenseItem = {
         id: uuidv4(),
         amount: parseFloat(amount),
-        categoryId,
-        date,
-        description,
+        categoryId: categoryId ?? "",
+        date: date ?? "",
+        description: description ?? "",
       };
       const data = setExpense(newExpense);
       const expensesData = getExpense();
@@ -70,12 +61,12 @@ const FastAction = (props: Props) => {
       dispatch(clearExpenseValues());
     }
     if (tab === "income" && amount && categoryId) {
-      const newIncome: ExpenseProps = {
+      const newIncome: ExpenseItem = {
         id: uuidv4(),
         amount: parseFloat(amount),
-        categoryId,
+        categoryId: categoryId ?? "",
         date,
-        description,
+        description: description ?? "",
       };
       const data = setIncome(newIncome);
       const incomeData = getIncome();
@@ -137,9 +128,11 @@ const FastAction = (props: Props) => {
             name='amount'
             placeholder={t("amount")}
             value={amount}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           />
@@ -156,9 +149,11 @@ const FastAction = (props: Props) => {
             name='description'
             placeholder={t("description")}
             value={description}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           />
@@ -174,21 +169,23 @@ const FastAction = (props: Props) => {
             id='categoryId'
             name='categoryId'
             value={categoryId}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           >
             <option value=''>{t("selectCategory")}</option>
             {tab == "expense" &&
-              expenseCategories.map((cat: any) => (
+              expenseCategories.map((cat: Category) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
                 </option>
               ))}
             {tab == "income" &&
-              incomeCategories.map((cat: any) => (
+              incomeCategories.map((cat: Category) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
                 </option>
@@ -208,9 +205,11 @@ const FastAction = (props: Props) => {
             name='date'
             placeholder='dd.mm.yyyy'
             value={date}
-            onChange={(e: any) =>
-              dispatchHandler(e.target.name, e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
+                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
+              }
+            }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100'
             required
           />

@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import useTheme from '../hooks/useTheme';
-const ThemeSwitcher = ({ open }: any) => {
+const ThemeSwitcher = ({ open }: { open: boolean }) => {
     const { theme, toggleTheme } = useTheme();
     return (
         <button

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { selectExpenses, setExpenses } from "@/lib/features/expenditure";
 import getExpense from "@/services/Expense/getExpense";
 import { useTranslations } from "next-intl";
@@ -16,39 +16,55 @@ import {
   YAxis,
 } from "recharts";
 import useTheme from "../hooks/useTheme";
+import { Category, FormattedData } from "@/types";
 
 const Expenses = () => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const t = useTranslations("Home");
   const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
-  const expense = useSelector(selectExpenses)
-  const formatData = expense.map((item: any) => {
-    return {
-      name: item.category.name,
-      id: item.category.id,
-      [t("Expense.tableName")]: item.amount
-    }
-  })
+  const expense = useSelector(selectExpenses);
 
-  const groupedData = formatData.reduce((acc: any, current: any) => {
-    const existingItem = acc.find((item: any) => item.id === current.id);
-    if (existingItem) {
-      existingItem.expense += current.expense;
-    } else {
-      acc.push(current);
+  const formatData: FormattedData[] = expense.map(
+    (item: { category: Category; amount: number }) => {
+      return {
+        name: item.category.name,
+        id: item.category.id,
+        [t("Expense.tableName")]: item.amount,
+      };
     }
-    return acc;
-  }, []);
+  );
+
+  const groupedData = formatData.reduce(
+    (acc: FormattedData[], current: FormattedData) => {
+      const existingItem = acc.find(
+        (item: FormattedData) => item.id === current.id
+      ) as FormattedData;
+
+      if (existingItem) {
+        const currentAmount = current[t("Expense.tableName")];
+        const existingAmount = existingItem[t("Expense.tableName")];
+        if (
+          typeof existingAmount === "number" &&
+          typeof currentAmount === "number"
+        ) {
+          existingItem[t("Expense.tableName")] = existingAmount + currentAmount;
+        }
+      } else {
+        acc.push(current);
+      }
+      return acc;
+    },
+    []
+  );
 
   useEffect(() => {
     const expenseData = getExpense();
     dispatch(setExpenses(expenseData));
   }, []);
 
-
   return (
-    <ResponsiveContainer width='100%' height='100%' >
+    <ResponsiveContainer width='100%' height='100%'>
       <BarChart
         width={500}
         height={300}
@@ -61,11 +77,15 @@ const Expenses = () => {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey="name" tick={{ fill: axisColor }} />
+        <XAxis dataKey='name' tick={{ fill: axisColor }} />
         <YAxis tick={{ fill: axisColor }} />
         <Tooltip />
         <Legend />
-        <Bar dataKey={t("Expense.tableName")} fill="#f87171" activeBar={<Rectangle />} />
+        <Bar
+          dataKey={t("Expense.tableName")}
+          fill='#f87171'
+          activeBar={<Rectangle />}
+        />
       </BarChart>
     </ResponsiveContainer>
   );

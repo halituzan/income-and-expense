@@ -6,6 +6,7 @@ import VerticalMenuItems from "./VerticalMenu/VerticalMenuItems";
 import ThemeSwitcher from "../UI/ThemeSwitcher";
 import LanguageSwitcher from "../UI/LanguageSwitcher";
 import Link from "next/link";
+import { NavigationProps } from "@/types";
 
 const Sidebar = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -26,7 +27,7 @@ const Sidebar = () => {
           <Link href={"/"} className='text-xl font-bold flex-1 text-primary dark:text-slate-50'>IAEX</Link>
         </div>
         <div className='flex flex-col items-start justify-between h-full self-stretch'>
-          {navigation.map((item) => {
+          {navigation.map((item: NavigationProps) => {
             return (
               <VerticalMenuItems
                 key={item.path}

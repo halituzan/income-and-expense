@@ -1,18 +1,15 @@
 "use client";
+import priceFormatter from "@/helpers/priceFormatter";
+import getTotalExpense from "@/services/Expense/getTotalExpense";
+import getTotalIncome from "@/services/Income/getTotalIncome";
 import { useTranslations } from "next-intl";
 import Expenses from "./Charts/Expenses";
 import Incomes from "./Charts/Incomes";
 import IncomesAndExpenses from "./Charts/IncomesAndExpenses";
 import Card from "./UI/Card";
-import { useDispatch, useSelector } from "react-redux";
-import { selectExpenses, selectIncomes } from "@/lib/features/expenditure";
-import getTotalIncome from "@/services/Income/getTotalIncome";
-import getTotalExpense from "@/services/Expense/getTotalExpense";
-import priceFormatter from "@/helpers/priceFormatter";
 
-type Props = {};
 
-const HomePage = (props: Props) => {
+const HomePage = () => {
   const t = useTranslations("Home");
   const totalIncome = getTotalIncome()
   const totalExpense = getTotalExpense()

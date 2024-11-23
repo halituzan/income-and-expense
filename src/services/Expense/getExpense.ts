@@ -1,3 +1,4 @@
+import { Category, ExpenseItem } from "@/types";
 import getExpensesCategories from "../Categories/getExpensesCategories";
 import dbName from "../dbNames";
 
@@ -6,11 +7,14 @@ export default () => {
   const data = (window.localStorage.getItem(expenses) as string) || "[]";
   const parsedData = JSON.parse(data);
   const expensesCategory = getExpensesCategories();
+  console.log("parsedData", parsedData);
 
-  const newData = parsedData.map((item: any) => {
+  const newData = parsedData.map((item: ExpenseItem) => {
     return {
       ...item,
-      category: expensesCategory.find((i: any) => i.id == item.categoryId) ?? {
+      category: expensesCategory.find(
+        (i: Category) => i.id == item.categoryId
+      ) ?? {
         name: "Tanımsız",
         id: "undefined",
       },

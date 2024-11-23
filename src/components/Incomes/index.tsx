@@ -16,18 +16,8 @@ import { v4 as uuidv4 } from "uuid";
 import DateRangePicker from "../UI/DateRangePicker";
 import HistoriesAddAction from "../HistoriesAddAction";
 import { useTranslations } from "next-intl";
-type IncomeProps = {
-  id: string;
-  amount: number;
-  categoryId: string;
-  date: any;
-  category?: CategoryProps;
-  description: string
-};
-type CategoryProps = {
-  id: string;
-  name: string;
-};
+import { Category, ExpenseItem } from "@/types";
+
 const Incomes = () => {
   const t = useTranslations("Income")
   const tf = useTranslations("Form")
@@ -36,21 +26,21 @@ const Incomes = () => {
 
   const expenseValues = useSelector(selectIncomeValues);
   const { amount, categoryId, date, description } = expenseValues;
-  const [incomesCategories, setIncomesCategories] = useState<any>([]);
+  const [incomesCategories, setIncomesCategories] = useState<Category[]>([]);
 
-  const dispatchHandler = (key: keyof ExpenditureValues, value: any) => {
+  const dispatchHandler = (key: keyof ExpenditureValues, value: string) => {
     dispatch(setIncomeValues({ key: key, value: value }));
   };
 
   const addIncome = (e: React.FormEvent) => {
     e.preventDefault();
     if (amount && categoryId) {
-      const newExpense: IncomeProps = {
+      const newExpense: ExpenseItem = {
         id: uuidv4(),
         amount: parseFloat(amount),
         categoryId,
         date,
-        description
+        description: description ?? ""
       };
       const data = setIncome(newExpense);
       const expensesData = getIncome();
@@ -84,7 +74,7 @@ const Incomes = () => {
           <p className='text-gray-500'>Henüz gelir kaydı bulunmamaktadır.</p>
         ) : (
           <ul className='space-y-4 divide-y'>
-            {incomes.map((expense: any) => (
+            {incomes.map((expense: ExpenseItem) => (
               <li key={expense.id} className='py-2'>
                 <div className='flex justify-between items-center'>
                   <div>

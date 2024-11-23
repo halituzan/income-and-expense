@@ -27,6 +27,7 @@ export default (date: string) => {
       return "Aralık";
 
     default:
+      "";
       break;
   }
 };
