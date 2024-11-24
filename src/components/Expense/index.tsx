@@ -28,7 +28,7 @@ import calculate from "@/helpers/calculate";
 import ExpenseChart from "../Charts/Expenses";
 import priceFormatter from "@/helpers/priceFormatter";
 import { toast } from "react-toastify";
-const { notificationsSettings, notifications } = dbName
+const { notificationsSettings, expenses: expenseTable } = dbName
 const Expense: FC = () => {
   const t = useTranslations("Expense");
   const tf = useTranslations("Form");
@@ -83,6 +83,12 @@ const Expense: FC = () => {
       }
     }
   };
+  const removeExpense = (id: string) => {
+    const copyData: ExpenseItem[] = [...expenses]
+    const removedData = copyData.filter(item => item.id !== id)
+    localStorage.setItem(expenseTable, JSON.stringify(removedData))
+    dispatch(setExpenses(removedData));
+  }
   const setExpenseDatas = () => {
     const expensesData = getExpense();
     dispatch(setExpenses(expensesData));
@@ -147,12 +153,15 @@ const Expense: FC = () => {
                 <h2 className='text-2xl font-semibold  text-primary dark:text-slate-50'>
                   {t("history")}
                 </h2>
-                <button
-                  className='ml-2 bg-primary text-slate-100 dark:bg-slate-200 dark:text-primary p-2 rounded-lg'
-                  onClick={handleExport}
-                >
-                  {te("download")}
-                </button>
+                {
+                  expenses.length > 0 && <button
+                    className='ml-2 bg-primary text-slate-100 dark:bg-slate-200 dark:text-primary p-2 rounded-lg'
+                    onClick={handleExport}
+                  >
+                    {te("download")}
+                  </button>
+                }
+
               </div>
 
               <div className='flex items-center'>
@@ -171,12 +180,15 @@ const Expense: FC = () => {
                 />
               </div>
             </div>
-            <div className='flex flex-1 justify-between items-center w-full p-1 bg-primary text-slate-100 dark:bg-slate-500 dark:text-slate-100'>
-              <div>{t("type")}</div>
-              <button onClick={handleSortClick} className='flex items-center'>
-                {t("sort")}<Icon icon='bx:sort' />
-              </button>
-            </div>
+            {
+              expenses.length > 0 && <div className='flex flex-1 justify-between items-center w-full p-1 bg-primary text-slate-100 dark:bg-slate-500 dark:text-slate-100'>
+                <div>{t("type")}</div>
+                <button onClick={handleSortClick} className='flex items-center'>
+                  {t("sort")}<Icon icon='bx:sort' />
+                </button>
+              </div>
+            }
+
             {expenses.length === 0 ? (
               <p className='text-primary dark:text-slate-50'>{t("noData")}</p>
             ) : (
@@ -192,13 +204,18 @@ const Expense: FC = () => {
                           {expense?.description}
                         </p>
                       </div>
-                      <div className='text-right'>
-                        <p className='font-bold text-lg text-expenses'>
-                          -{priceFormatter(expense?.amount as number) ?? 0}
-                        </p>
-                        <p className='text-sm text-primary/80 dark:text-slate-200'>
-                          {expense?.date?.toLocaleString()}
-                        </p>
+                      <div className="flex items-center">
+                        <div className='text-right'>
+                          <p className='font-bold text-lg text-expenses'>
+                            -{priceFormatter(expense?.amount as number) ?? 0}
+                          </p>
+                          <p className='text-sm text-primary/80 dark:text-slate-200'>
+                            {expense?.date?.toLocaleString()}
+                          </p>
+                        </div>
+                        <button onClick={() => removeExpense(expense.id as string)} className="w-8 h-8 ml-2 bg-expenses hover:bg-expenses/80 flex justify-center items-center rounded-lg">
+                          <Icon icon='material-symbols:delete' color="white" fontSize={24} />
+                        </button>
                       </div>
                     </div>
                   </li>

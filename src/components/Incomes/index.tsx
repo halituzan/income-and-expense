@@ -11,6 +11,7 @@ import {
   setIncomes,
   setIncomeValues,
 } from "@/lib/features/expenditure";
+
 import getIncomesCategories from "@/services/Categories/getIncomesCategories";
 import getIncome from "@/services/Income/getIncome";
 import setIncome from "@/services/Income/setIncome";
@@ -24,7 +25,8 @@ import * as XLSX from "xlsx";
 import IncomesChart from "../Charts/Incomes";
 import HistoriesAddAction from "../HistoriesAddAction";
 import DateRangePicker from "../UI/DateRangePicker";
-
+import dbName from "@/services/dbNames";
+const { incomes: incomeTable } = dbName
 const Incomes = () => {
   const t = useTranslations("Income")
   const tf = useTranslations("Form")
@@ -58,6 +60,12 @@ const Incomes = () => {
       dispatch(clearIncomeValues());
     }
   };
+  const removeIncome = (id: string) => {
+    const copyData: ExpenseItem[] = [...incomes]
+    const removedData = copyData.filter(item => item.id !== id)
+    localStorage.setItem(incomeTable, JSON.stringify(removedData))
+    dispatch(setIncomes(removedData));
+  }
   const handleSortClick = () => {
     const nextOrder = sort === null ? "desc" : sort === "desc" ? "asc" : null;
     setSort(nextOrder);
@@ -119,12 +127,15 @@ const Incomes = () => {
                 <h2 className='text-2xl font-semibold  text-primary dark:text-slate-50'>
                   {t("history")}
                 </h2>
-                <button
-                  className='ml-2 bg-primary text-slate-100 dark:bg-slate-200 dark:text-primary p-2 rounded-lg'
-                  onClick={handleExport}
-                >
-                  {te("download")}
-                </button>
+                {
+                  incomes.length > 0 && <button
+                    className='ml-2 bg-primary text-slate-100 dark:bg-slate-200 dark:text-primary p-2 rounded-lg'
+                    onClick={handleExport}
+                  >
+                    {te("download")}
+                  </button>
+                }
+
               </div>
 
               <div className='flex items-center'>
@@ -143,13 +154,14 @@ const Incomes = () => {
                 />
               </div>
             </div>
-            <div className="flex flex-1 justify-between items-center w-full p-1 bg-primary text-slate-100 dark:bg-slate-500 dark:text-slate-100">
-              <div>{t("type")}</div>
-              <button onClick={handleSortClick} className="flex items-center">
-                {t("sort")} <Icon icon="bx:sort" />
-              </button>
-            </div>
-
+            {
+              incomes.length > 0 && <div className='flex flex-1 justify-between items-center w-full p-1 bg-primary text-slate-100 dark:bg-slate-500 dark:text-slate-100'>
+                <div>{t("type")}</div>
+                <button onClick={handleSortClick} className='flex items-center'>
+                  {t("sort")}<Icon icon='bx:sort' />
+                </button>
+              </div>
+            }
             {incomes.length === 0 ? (
               <p className='text-gray-500'> {t("noData")}</p>
             ) : (
@@ -161,14 +173,21 @@ const Incomes = () => {
                         <p className='font-semibold text-primary dark:text-slate-50'>{expense?.category?.name}</p>
                         <p className='text-primary/80 dark:text-slate-200 text-sm'>{expense?.description}</p>
                       </div>
-                      <div className='text-right'>
-                        <p className='font-bold text-lg text-incomes'>
-                          {priceFormatter(expense?.amount as number) ?? 0}
-                        </p>
-                        <p className='text-sm text-primary/80 dark:text-slate-200'>
-                          {expense?.date?.toLocaleString()}
-                        </p>
+                      <div className="flex items-center">
+                        <div className='text-right'>
+                          <p className='font-bold text-lg text-incomes'>
+                            {priceFormatter(expense?.amount as number) ?? 0}
+                          </p>
+                          <p className='text-sm text-primary/80 dark:text-slate-200'>
+                            {expense?.date?.toLocaleString()}
+                          </p>
+                        </div>
+                        <button onClick={() => removeIncome(expense.id as string)} className="w-8 h-8 ml-2 bg-expenses hover:bg-expenses/80 flex justify-center items-center rounded-lg">
+                          <Icon icon='material-symbols:delete' color="white" fontSize={24} />
+                        </button>
+
                       </div>
+
                     </div>
                   </li>
                 ))}

@@ -12,8 +12,6 @@ export default function filterByDateRange(
     end = new Date(endDate);
   }
   return data.filter((item: any) => {
-    console.log("item.date", item.date);
-
     const itemDate = new Date(item.date);
     const isAfterStart = start ? itemDate >= start : true;
     const isBeforeEnd = end ? itemDate <= end : true;
