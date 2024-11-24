@@ -58,6 +58,9 @@ const config: Config = {
         menuFadeUp: "menu-fade-up 0.1s",
         logoAnimate: "logo-animate 0.2s",
       },
+      transitionTimingFunction: {
+        "in": "cubic-bezier(0,_-1,_0.07,_-1)",
+      },
     },
   },
   plugins: [],

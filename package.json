@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "react-i18next": "^14.1.2",
     "react-redux": "^9.1.2",
+    "react-toastify": "^10.0.6",
     "recharts": "^2.13.3",
     "uuid": "^11.0.3",
     "xlsx": "^0.18.5"

@@ -25,6 +25,7 @@
         "description": "Açıklama",
         "category": "Kategori",
         "selectCategory": "Kategori Seçin",
+        "currency": "Kur Seçin",
         "spendTime": "Harcama Zamanı",
         "limit": "Limit"
     },
@@ -57,5 +58,11 @@
         "amount": "Miktar",
         "date": "Tarih",
         "download": "Excel'e İndir"
+    },
+    "Settings": {
+        "categoryAlertPercent": "Kategori Uyarı Yüzdesi",
+        "currency": "Kur",
+        "title": "Bildirim Ayarları",
+        "openNotification": "Bildirimleri Aç"
     }
 }

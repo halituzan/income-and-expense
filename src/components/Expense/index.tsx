@@ -21,6 +21,13 @@ import sortByDate from "@/helpers/sortByDate";
 import filterByDateRange from "@/helpers/filteredByDateRange";
 import DateRangePicker from "../UI/DateRangePicker";
 import * as XLSX from "xlsx";
+import getLimit from "@/services/Categories/getLimit";
+import getExpenseCategoryById from "@/services/Categories/getExpenseCategoryById";
+import dbName from "@/services/dbNames";
+import calculate from "@/helpers/calculate";
+import priceFormatter from "@/helpers/priceFormatter";
+import { toast } from "react-toastify";
+const { notificationsSettings, notifications } = dbName
 const Expense: FC = () => {
   const t = useTranslations("Expense");
   const tf = useTranslations("Form");
@@ -61,6 +68,19 @@ const Expense: FC = () => {
 
       dispatch(setExpenses(expensesData));
       dispatch(clearExpenseValues());
+      const notificationSetting = JSON.parse(localStorage.getItem(notificationsSettings) as string)
+      const category = getLimit(categoryId)
+      console.log("category", category);
+
+      const categoryTotal = getExpenseCategoryById(categoryId).total
+      if ((categoryTotal / category.limit) * 100 >= notificationSetting.categoryPercent) {
+        if (notificationSetting.isOpenNotification) {
+          toast.error(`${category.data.name ?? "Kategori"} harcama limitinin ${notificationSetting.categoryPercent}%'i aşıldı!`, { position: "top-right" });
+          // Daha sonrası için bir logic kurulucak
+          // localStorage.setItem(notifications, JSON.stringify([{ message: `${category.data[0].name ?? "Kategori"} harcama limiti ${notificationSetting.categoryPercent}%'i aşıldı!`, category, limit: category.limit }]))
+        }
+
+      }
     }
   };
   const setExpenseDatas = () => {
@@ -171,8 +191,8 @@ const Expense: FC = () => {
                     </p>
                   </div>
                   <div className='text-right'>
-                    <p className='font-bold text-lg text-primary dark:text-slate-50'>
-                      {expense?.amount?.toFixed(2) ?? 0} TL
+                    <p className='font-bold text-lg text-expenses'>
+                      -{priceFormatter(expense?.amount as number) ?? 0}
                     </p>
                     <p className='text-sm text-primary/80 dark:text-slate-200'>
                       {expense?.date?.toLocaleString()}
@@ -181,6 +201,19 @@ const Expense: FC = () => {
                 </div>
               </li>
             ))}
+            <li>
+              <div className='flex justify-between items-center'>
+                <p className='font-semibold text-primary dark:text-slate-50'>
+                  Toplam:
+                </p>
+                <div className='text-right'>
+                  <div className='font-bold text-lg text-expenses'>
+                    -{priceFormatter(calculate(expenses))}
+                  </div>
+
+                </div>
+              </div>
+            </li>
           </ul>
         )}
       </div>

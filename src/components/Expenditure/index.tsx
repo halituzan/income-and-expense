@@ -52,7 +52,6 @@ export default function CategoryManager() {
       setExpenseCategories(data)
     }
   };
-
   //? Fonktions
 
   //? Hooks
@@ -66,7 +65,7 @@ export default function CategoryManager() {
   return (
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Gelir Kategorileri */}
+        {/* Gelir Kalemleri */}
         <div className="bg-incomes/10 dark:bg-incomes p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4 text-incomes dark:text-slate-100">
             {t("incomes")}
@@ -78,7 +77,7 @@ export default function CategoryManager() {
                 value={newIncomeCategory}
                 onChange={(e) => setNewIncomeCategory(e.target.value)}
                 placeholder={t("newIncome")}
-                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100"
+                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100 w-full"
               />
               <button
                 type="submit"
@@ -103,11 +102,11 @@ export default function CategoryManager() {
           </ul>
         </div>
 
-        {/* Gider Kategorileri */}
+        {/* Gider Kalemleri */}
         <div className="bg-expenses/10 dark:bg-expenses p-4 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4 text-expenses dark:text-slate-100">{t("expenses")}</h2>
-          <form onSubmit={(e) => { e.preventDefault(); addCategory('expense'); }} className="mb-4">
-            <div className="flex">
+          <form onSubmit={(e) => { e.preventDefault(); addCategory('expense'); }} className="mb-4 w-full">
+            <div className="flex w-full flex-1">
 
               <input
                 type="number"
@@ -121,7 +120,7 @@ export default function CategoryManager() {
                 value={newExpenseCategory}
                 onChange={(e) => setNewExpenseCategory(e.target.value)}
                 placeholder={t("newExpense")}
-                className=" px-3 py-2 border focus:outline-none bg-white dark:bg-slate-100 flex-1"
+                className=" px-3 py-2 border focus:outline-none bg-white dark:bg-slate-100 flex-1 w-full"
               />
               <button
                 type="submit"
@@ -134,8 +133,8 @@ export default function CategoryManager() {
           <ul className="space-y-2">
             {expenseCategories.map((category: Category) => (
               <div className='flex items-center w-full'>
-                <li key={category.id} className="bg-slate-50 p-2 text-primary rounded shadow flex-1">
-                  <span className='font-semibold'>{category.name}</span>{category.limit && <span className='text-slate-500'>- {priceFormatter(category.limit as number)}</span>}
+                <li key={category.id} className="bg-slate-50 p-2 text-primary rounded shadow flex-1 flex justify-between items-center">
+                  <span className='font-semibold'>{category.name}</span>{category.limit && <span className='text-warning text-[10px]'>Limit: {priceFormatter(category.limit as number)}</span>}
                 </li>
                 <button
                   onClick={() => removeCategory("expense", category.id as string)}

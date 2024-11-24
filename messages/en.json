@@ -25,6 +25,7 @@
         "description": "Description",
         "category": "Category",
         "selectCategory": "Select Category",
+        "currency": "Select Currency",
         "spendTime": "Spend Time",
         "limit": "Limit"
     },
@@ -57,5 +58,11 @@
         "amount": "Amount",
         "date": "Date",
         "download": "Download Excel"
+    },
+    "Settings": {
+        "categoryAlertPercent": "Category Warning Percentage",
+        "currency": "Currency",
+        "title": "Notification Settings",
+        "openNotification": "Turn on Notifications"
     }
 }
