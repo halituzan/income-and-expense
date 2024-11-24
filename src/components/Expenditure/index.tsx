@@ -1,4 +1,5 @@
 "use client"
+import priceFormatter from '@/helpers/priceFormatter';
 import getExpensesCategories from '@/services/Categories/getExpensesCategories';
 import getIncomesCategories from '@/services/Categories/getIncomesCategories';
 import dbName from '@/services/dbNames';
@@ -16,6 +17,7 @@ export default function CategoryManager() {
   const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
   const [newIncomeCategory, setNewIncomeCategory] = useState('');
   const [newExpenseCategory, setNewExpenseCategory] = useState('');
+  const [expenseLimit, setExpenseLimit] = useState<string>("");
   //? States
 
   //? Fonktions
@@ -28,9 +30,10 @@ export default function CategoryManager() {
       setIncomeCategories(data)
     } else if (type === 'expense' && newExpenseCategory.trim() !== '') {
       const oldData = getExpensesCategories()
-      const data = [...oldData, { id: uuidv4(), name: newExpenseCategory }]
+      const data = [...oldData, { id: uuidv4(), name: newExpenseCategory, limit: expenseLimit }]
       localStorage.setItem(expensesCategory, JSON.stringify(data))
       setNewExpenseCategory("")
+      setExpenseLimit("")
       setExpenseCategories(data)
     }
   };
@@ -88,7 +91,7 @@ export default function CategoryManager() {
           <ul className="space-y-2">
             {incomeCategories?.map((category: Category) => (
               <div className='flex items-center w-full'>
-                <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1">{category.name}</li>
+                <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1"><span className='font-semibold text-primary'>{category.name}</span></li>
                 <button
                   onClick={() => removeCategory("income", category?.id as string)}
                   className="bg-warning/80 text-white px-4 py-2 rounded-r-md hover:bg-warning focus:outline-none"
@@ -105,12 +108,20 @@ export default function CategoryManager() {
           <h2 className="text-xl font-semibold mb-4 text-expenses dark:text-slate-100">{t("expenses")}</h2>
           <form onSubmit={(e) => { e.preventDefault(); addCategory('expense'); }} className="mb-4">
             <div className="flex">
+
+              <input
+                type="number"
+                value={expenseLimit}
+                onChange={(e) => setExpenseLimit(e.target.value)}
+                placeholder={"Limit"}
+                className="px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100 w-[100px]"
+              />
               <input
                 type="text"
                 value={newExpenseCategory}
                 onChange={(e) => setNewExpenseCategory(e.target.value)}
                 placeholder={t("newExpense")}
-                className="flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100"
+                className=" px-3 py-2 border focus:outline-none bg-white dark:bg-slate-100 flex-1"
               />
               <button
                 type="submit"
@@ -123,7 +134,9 @@ export default function CategoryManager() {
           <ul className="space-y-2">
             {expenseCategories.map((category: Category) => (
               <div className='flex items-center w-full'>
-                <li key={category.id} className="bg-slate-50 p-2 rounded shadow flex-1">{category.name}</li>
+                <li key={category.id} className="bg-slate-50 p-2 text-primary rounded shadow flex-1">
+                  <span className='font-semibold'>{category.name}</span>{category.limit && <span className='text-slate-500'>- {priceFormatter(category.limit as number)}</span>}
+                </li>
                 <button
                   onClick={() => removeCategory("expense", category.id as string)}
                   className="bg-warning/80 text-white px-4 py-2 rounded-r-md hover:bg-warning focus:outline-none"

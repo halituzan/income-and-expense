@@ -50,5 +50,12 @@
         "incomes": "Incomes History",
         "expenses": "Expenses History",
         "items": "Income and expense items"
+    },
+    "Exports": {
+        "category": "Category",
+        "description": "Description",
+        "amount": "Amount",
+        "date": "Date",
+        "download": "Download Excel"
     }
 }

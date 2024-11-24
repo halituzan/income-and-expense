@@ -6,11 +6,11 @@ export interface ExpenseItem {
     description?: string
     categoryId?: string
     createdAt?: Date
-    limit?: string
 }
 export interface Category {
     id?: string;
     name?: string;
+    limit?: number
 };
 
 export interface FormattedData {

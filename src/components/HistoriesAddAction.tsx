@@ -13,7 +13,7 @@ type Props = {
   buttonColor: string;
   isLimit: boolean
 };
-const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description', 'limit'];
+const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description'];
 const HistoriesAddAction = ({
   values,
   categoryData,
@@ -25,7 +25,7 @@ const HistoriesAddAction = ({
   isLimit = false
 }: Props) => {
   const t = useTranslations("Form")
-  const { amount, categoryId, date, description, limit } = values;
+  const { amount, categoryId, date, description } = values;
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const HistoriesAddAction = ({
             required
           />
         </div>
-        <div className='col-span-12 md:col-span-6 mt-0'>
+        <div className='col-span-12 md:col-span-8 mt-0'>
           <label
             htmlFor='description'
             className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
@@ -127,30 +127,7 @@ const HistoriesAddAction = ({
             required
           />
         </div>
-        {
-          isLimit && <div className='col-span-12 md:col-span-2 mt-0'>
-            <label
-              htmlFor='limit'
-              className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
-            >
-              {t("limit")}
-            </label>
-            <input
-              type='number'
-              id='limit'
-              name='limit'
-              placeholder={t("limit")}
-              value={limit}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
-                  dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
-                }
-              }}
-              className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
 
-            />
-          </div>
-        }
 
         <div className='col-span-12 md:col-span-4 self flex items-end '>
           <button

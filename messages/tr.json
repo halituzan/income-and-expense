@@ -50,5 +50,12 @@
         "incomes": "Gelirler",
         "expenses": "Giderler",
         "items": "Gelir Gider Kalemleri"
+    },
+    "Exports": {
+        "category": "Kategori",
+        "description": "Açıklama",
+        "amount": "Miktar",
+        "date": "Tarih",
+        "download": "Excel'e İndir"
     }
 }
