@@ -32,19 +32,32 @@
     "Expense": {
         "title": "Yeni Harcama Ekle",
         "history": "Harcama Geçmişi",
-        "noData": "Henüz harcama kaydı bulunmamaktadır."
+        "noData": "Henüz harcama kaydı bulunmamaktadır.",
+        "total": "Toplam",
+        "sort": "Tarihe göre sırala",
+        "type": "Tür"
     },
     "Income": {
         "title": "Yeni Gelir Ekle",
         "history": "Gelir Geçmişi",
-        "noData": "Henüz harcama kaydı bulunmamaktadır."
+        "noData": "Henüz harcama kaydı bulunmamaktadır.",
+        "total": "Toplam",
+        "sort": "Tarihe göre sırala",
+        "type": "Tür"
     },
     "Expenditure": {
         "incomes": "Gelir Kalemleri",
         "expenses": "Gider Kalemleri",
         "add": "Ekle",
         "newIncome": "Yeni Gelir Kalemi",
-        "newExpense": "Yeni Gider Kalemi"
+        "newExpense": "Yeni Gider Kalemi",
+        "Modal": {
+            "title": "Kategori Silme İşlemi",
+            "h1": "{category} Kalemini Silmek İstediğinizden Emin misiniz?",
+            "p": "Bu işlem sonrasında {category} kategorisindeki tüm işlemler tanımsız olarak ayarlanacak.Bu işlemin geri alınamayacağını unutmayın.",
+            "cancel": "İptal",
+            "confirm": "Onay"
+        }
     },
     "Sidebar": {
         "home": "Ana Sayfa",

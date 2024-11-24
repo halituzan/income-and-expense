@@ -32,19 +32,32 @@
     "Expense": {
         "title": "Add New Expense",
         "history": "Expense History",
-        "noData": "Henüz harcama kaydı bulunmamaktadır."
+        "noData": "There is no expenditure record yet.",
+        "total": "Total",
+        "sort": "Sort by Date",
+        "type": "Type"
     },
     "Income": {
         "title": "Add New Income",
         "history": "Income History",
-        "noData": "Henüz harcama kaydı bulunmamaktadır."
+        "noData": "There is no expenditure record yet.",
+        "total": "Total",
+        "sort": "Sort by Date",
+        "type": "Type"
     },
     "Expenditure": {
         "incomes": "Incomes Categories",
         "expenses": "Expenses Categories",
         "add": "Add",
         "newIncome": "New Income Category",
-        "newExpense": "New Expense Category"
+        "newExpense": "New Expense Category",
+        "Modal": {
+            "title": "Delete Category",
+            "h1": "Are You Sure You Want to Delete Category {category}?",
+            "p": "After this operation, all operations in the {category} category will be set to undefined. Please note that this operation cannot be undone.",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        }
     },
     "Sidebar": {
         "home": "Home",

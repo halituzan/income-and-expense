@@ -25,6 +25,7 @@ import getLimit from "@/services/Categories/getLimit";
 import getExpenseCategoryById from "@/services/Categories/getExpenseCategoryById";
 import dbName from "@/services/dbNames";
 import calculate from "@/helpers/calculate";
+import ExpenseChart from "../Charts/Expenses";
 import priceFormatter from "@/helpers/priceFormatter";
 import { toast } from "react-toastify";
 const { notificationsSettings, notifications } = dbName
@@ -70,7 +71,6 @@ const Expense: FC = () => {
       dispatch(clearExpenseValues());
       const notificationSetting = JSON.parse(localStorage.getItem(notificationsSettings) as string)
       const category = getLimit(categoryId)
-      console.log("category", category);
 
       const categoryTotal = getExpenseCategoryById(categoryId).total
       if ((categoryTotal / category.limit) * 100 >= notificationSetting.categoryPercent) {
@@ -101,6 +101,7 @@ const Expense: FC = () => {
   }, [sort]);
   useEffect(() => {
     if (dateRange[0] || dateRange[1]) {
+      console.log("dateRange", dateRange);
       const data = filterByDateRange(expenses, dateRange[0], dateRange[1]);
       dispatch(setExpenses(data));
     } else {
@@ -114,7 +115,7 @@ const Expense: FC = () => {
     const formattedData = expenses.map((expense: any) => ({
       [te("category")]: expense.category.name,
       [te("description")]: expense.description,
-      [te("amount")]: expense.amount.toFixed(2) + " TL",
+      [te("amount")]: priceFormatter(expense.amount) + " TL",
       [te("date")]: new Date(expense.date).toLocaleString(),
     }));
     const worksheet = XLSX.utils.json_to_sheet(formattedData);
@@ -135,88 +136,100 @@ const Expense: FC = () => {
         title={t("title")}
         isLimit={true}
       />
-
-      <div
-        ref={listRef}
-        className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'
-      >
-        <div className='flex flex-col md:flex-row justify-between items-center w-full mb-2'>
-          <div className='flex items-center mb-4'>
-            <h2 className='text-2xl font-semibold  text-primary dark:text-slate-50'>
-              {t("history")}
-            </h2>
-            <button
-              className='ml-2 bg-primary text-slate-100 dark:bg-slate-200 dark:text-primary p-2 rounded-lg'
-              onClick={handleExport}
-            >
-              {te("download")}
-            </button>
-          </div>
-
-          <div className='flex items-center'>
-            <button
-              onClick={() => {
-                setExpenseDatas();
-                setDateRange([undefined, undefined]);
-              }}
-              className='mr-2 text-primary dark:text-slate-100'
-            >
-              Clear
-            </button>
-            <DateRangePicker
-              dateRange={dateRange}
-              setDateRange={setDateRange}
-            />
-          </div>
-        </div>
-        <div className='flex flex-1 justify-between items-center w-full p-1 bg-primary text-slate-100 dark:bg-slate-500 dark:text-slate-100'>
-          <div>Tür</div>
-          <button onClick={handleSortClick} className='flex items-center'>
-            Tarihe Göre Sırala <Icon icon='bx:sort' />
-          </button>
-        </div>
-        {expenses.length === 0 ? (
-          <p className='text-primary dark:text-slate-50'>{t("noData")}</p>
-        ) : (
-          <ul className='space-y-4 divide-y'>
-            {expenses.map((expense: ExpenseItem) => (
-              <li key={expense.id} className='py-2'>
-                <div className='flex justify-between items-center'>
-                  <div>
-                    <p className='font-semibold text-primary dark:text-slate-50'>
-                      {expense?.category?.name}
-                    </p>
-                    <p className='text-primary/80 dark:text-slate-200 text-sm'>
-                      {expense?.description}
-                    </p>
-                  </div>
-                  <div className='text-right'>
-                    <p className='font-bold text-lg text-expenses'>
-                      -{priceFormatter(expense?.amount as number) ?? 0}
-                    </p>
-                    <p className='text-sm text-primary/80 dark:text-slate-200'>
-                      {expense?.date?.toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            ))}
-            <li>
-              <div className='flex justify-between items-center'>
-                <p className='font-semibold text-primary dark:text-slate-50'>
-                  Toplam:
-                </p>
-                <div className='text-right'>
-                  <div className='font-bold text-lg text-expenses'>
-                    -{priceFormatter(calculate(expenses))}
-                  </div>
-
-                </div>
+      <div className="grid grid-cols-12 gap-2">
+        <div className="col-span-12 md:col-span-8 order-2 md:order-1">
+          <div
+            ref={listRef}
+            className='bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md'
+          >
+            <div className='flex flex-col md:flex-row justify-between items-center w-full mb-2'>
+              <div className='flex items-center mb-4'>
+                <h2 className='text-2xl font-semibold  text-primary dark:text-slate-50'>
+                  {t("history")}
+                </h2>
+                <button
+                  className='ml-2 bg-primary text-slate-100 dark:bg-slate-200 dark:text-primary p-2 rounded-lg'
+                  onClick={handleExport}
+                >
+                  {te("download")}
+                </button>
               </div>
-            </li>
-          </ul>
-        )}
+
+              <div className='flex items-center'>
+                <button
+                  onClick={() => {
+                    setExpenseDatas();
+                    setDateRange([undefined, undefined]);
+                  }}
+                  className='mr-2 text-primary dark:text-slate-100'
+                >
+                  Clear
+                </button>
+                <DateRangePicker
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
+                />
+              </div>
+            </div>
+            <div className='flex flex-1 justify-between items-center w-full p-1 bg-primary text-slate-100 dark:bg-slate-500 dark:text-slate-100'>
+              <div>{t("type")}</div>
+              <button onClick={handleSortClick} className='flex items-center'>
+                {t("sort")}<Icon icon='bx:sort' />
+              </button>
+            </div>
+            {expenses.length === 0 ? (
+              <p className='text-primary dark:text-slate-50'>{t("noData")}</p>
+            ) : (
+              <ul className='space-y-4 divide-y'>
+                {expenses.map((expense: ExpenseItem) => (
+                  <li key={expense.id} className='py-2'>
+                    <div className='flex justify-between items-center'>
+                      <div>
+                        <p className='font-semibold text-primary dark:text-slate-50'>
+                          {expense?.category?.name}
+                        </p>
+                        <p className='text-primary/80 dark:text-slate-200 text-sm'>
+                          {expense?.description}
+                        </p>
+                      </div>
+                      <div className='text-right'>
+                        <p className='font-bold text-lg text-expenses'>
+                          -{priceFormatter(expense?.amount as number) ?? 0}
+                        </p>
+                        <p className='text-sm text-primary/80 dark:text-slate-200'>
+                          {expense?.date?.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+                <li>
+                  <div className='flex justify-between items-center'>
+                    <p className='font-semibold text-primary dark:text-slate-50'>
+                      {t("total")}:
+                    </p>
+                    <div className='text-right'>
+                      <div className='font-bold text-lg text-expenses'>
+                        -{priceFormatter(calculate(expenses))}
+                      </div>
+
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            )}
+          </div>
+        </div>
+
+        <div className="col-span-12 md:col-span-4 order-1 md:order-2">
+          <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md">
+            <div className="max-h-[300px] h-[300px] w-full">
+              <ExpenseChart />
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   );
 };

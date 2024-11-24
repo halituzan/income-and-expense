@@ -168,7 +168,7 @@ const SettingsPage = (props: Props) => {
             <div className='w-[300px] my-3'>
               <label
                 htmlFor='currency'
-                className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
+                className='block text-sm font-medium text-gray-700 dark:text-slate-100  mb-2'
               >
                 {t("currency")}
               </label>
@@ -177,11 +177,12 @@ const SettingsPage = (props: Props) => {
                 name='currency'
                 value={notificationData.currency}
                 onChange={changeHandler}
-                className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
+                className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed'
                 disabled={!notificationData.isOpenNotification}
               >
                 <option value='TRY'>₺ - TL</option>
                 <option value='USD'>$ - USD</option>
+                <option value='EUR'>€ - EUR</option>
               </select>
             </div>
 
