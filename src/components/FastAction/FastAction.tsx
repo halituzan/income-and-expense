@@ -27,15 +27,14 @@ import getLimit from "@/services/Categories/getLimit";
 import getExpenseCategoryById from "@/services/Categories/getExpenseCategoryById";
 import { toast } from "react-toastify";
 const { notificationsSettings } = dbName
-type Props = {};
+
 const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description'];
 
-const FastAction = (props: Props) => {
+const FastAction = () => {
   const dispatch = useDispatch();
   const t = useTranslations("Form");
   const expenseValues = useSelector(selectExpenseValues);
   const incomeValues = useSelector(selectIncomeValues);
-
   const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
   const [incomeCategories, setIncomeCategories] = useState<Category[]>([]);
   const [tab, setTab] = useState("income");
@@ -104,6 +103,7 @@ const FastAction = (props: Props) => {
   useEffect(() => {
     const expensesData = getExpense();
     dispatch(setExpenses(expensesData));
+   
   }, []);
   return (
     <div className='h-full flex flex-col justify-between'>
