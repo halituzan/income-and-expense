@@ -22,7 +22,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import CategoryInput from "../UI/CategoryInput";
-
+import dbName from "@/services/dbNames";
+import getLimit from "@/services/Categories/getLimit";
+import getExpenseCategoryById from "@/services/Categories/getExpenseCategoryById";
+import { toast } from "react-toastify";
+const { notificationsSettings } = dbName
 type Props = {};
 const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description'];
 
@@ -61,6 +65,17 @@ const FastAction = (props: Props) => {
 
       dispatch(setExpenses(expensesData));
       dispatch(clearExpenseValues());
+      const notificationSetting = JSON.parse(localStorage.getItem(notificationsSettings) as string)
+      const category = getLimit(categoryId)
+      const categoryTotal = getExpenseCategoryById(categoryId).total
+      if ((categoryTotal / category.limit) * 100 >= notificationSetting.categoryPercent) {
+        if (notificationSetting.isOpenNotification) {
+          toast.warning(`${category.data.name ?? "Kategori"} harcama limitinin ${notificationSetting.categoryPercent}%'i aşıldı!`, { position: "top-right" });
+          // Daha sonrası için bir logic kurulucak
+          // localStorage.setItem(notifications, JSON.stringify([{ message: `${category.data[0].name ?? "Kategori"} harcama limiti ${notificationSetting.categoryPercent}%'i aşıldı!`, category, limit: category.limit }]))
+        }
+
+      }
     }
     if (tab === "income" && amount && categoryId) {
       const newIncome: ExpenseItem = {
@@ -84,7 +99,7 @@ const FastAction = (props: Props) => {
     const incomeCategory = getIncomesCategories();
     setExpenseCategories(expenseCategory);
     setIncomeCategories(incomeCategory);
-  }, []);
+  }, [tab]);
 
   useEffect(() => {
     const expensesData = getExpense();

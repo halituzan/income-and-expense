@@ -107,7 +107,7 @@ export default function CategoryManager() {
           </form>
           <ul className='space-y-2'>
             {incomeCategories?.map((category: Category) => (
-              <div className='flex items-center w-full'>
+              <div className='flex items-center w-full' key={category.id}>
                 <li
                   key={category.id}
                   className='bg-slate-50 p-2 rounded shadow flex-1'
@@ -167,7 +167,7 @@ export default function CategoryManager() {
           </form>
           <ul className='space-y-2'>
             {expenseCategories.map((category: Category) => (
-              <div className='flex items-center w-full'>
+              <div className='flex items-center w-full' key={category.id}>
                 <li
                   key={category.id}
                   className='bg-slate-50 p-2 text-primary rounded shadow flex-1 flex justify-between items-center'

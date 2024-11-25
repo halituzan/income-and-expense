@@ -71,11 +71,10 @@ const Expense: FC = () => {
       dispatch(clearExpenseValues());
       const notificationSetting = JSON.parse(localStorage.getItem(notificationsSettings) as string)
       const category = getLimit(categoryId)
-
       const categoryTotal = getExpenseCategoryById(categoryId).total
       if ((categoryTotal / category.limit) * 100 >= notificationSetting.categoryPercent) {
         if (notificationSetting.isOpenNotification) {
-          toast.error(`${category.data.name ?? "Kategori"} harcama limitinin ${notificationSetting.categoryPercent}%'i aşıldı!`, { position: "top-right" });
+          toast.warning(`${category.data.name ?? "Kategori"} harcama limitinin ${notificationSetting.categoryPercent}%'i aşıldı!`, { position: "top-right" });
           // Daha sonrası için bir logic kurulucak
           // localStorage.setItem(notifications, JSON.stringify([{ message: `${category.data[0].name ?? "Kategori"} harcama limiti ${notificationSetting.categoryPercent}%'i aşıldı!`, category, limit: category.limit }]))
         }
