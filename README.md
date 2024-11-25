@@ -12,4 +12,4 @@
 
 [date-fns:](https://date-fns.org/) Zaman yönetimi.
 
-[recharts:]([https://date-fns.org/](https://recharts.org/en-US/)) Grafik komponent yönetimi.
+[recharts:](https://recharts.org/en-US/) Grafik komponent yönetimi.
