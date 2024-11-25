@@ -108,7 +108,6 @@ const Expense: FC = () => {
   }, [sort]);
   useEffect(() => {
     if (dateRange[0] || dateRange[1]) {
-      console.log("dateRange", dateRange);
       const data = filterByDateRange(expenses, dateRange[0], dateRange[1]);
       dispatch(setExpenses(data));
     } else {

@@ -48,7 +48,6 @@ const SettingsPage = (props: Props) => {
     if (!data.percent) {
       setNotificationSettings("categoryPercent", 80);
     }
-    console.log("data.isOpenNotification", data.isOpenNotification);
 
     if (data.isOpenNotification !== true && data.isOpenNotification !== false) {
       setNotificationSettings("isOpenNotification", true);

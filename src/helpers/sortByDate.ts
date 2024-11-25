@@ -2,9 +2,6 @@ export default function sortByDate(
   data: any,
   order: "asc" | "desc" = "asc"
 ) {
-//   console.log(data);
-//   console.log(order);
-
   return data.sort((a: any, b: any) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);

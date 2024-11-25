@@ -25,7 +25,6 @@ const ExpenseVertical = () => {
   const axisColor = theme === "dark" ? "#ffffff" : "#475569";
   const dispatch = useDispatch();
   const expense = useSelector(selectExpenses);
-  console.log("expense", expense);
 
   const formatData: FormattedData[] = expense.map((item: any) => {
     return {

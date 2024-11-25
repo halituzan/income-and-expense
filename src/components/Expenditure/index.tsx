@@ -130,9 +130,12 @@ export default function CategoryManager() {
                   key={category.id}
                   className='bg-slate-50 p-2 rounded shadow flex-1'
                 >
-                  <span className='font-semibold text-primary'>
-                    {category.name}
-                  </span>
+                  <div className="flex items-center">
+                    <span className={`w-2 h-2 block rounded-full mr-1 shadow shadow-slate-50/50`} style={{
+                      background: category?.color
+                    }}></span>
+                    <span className='font-semibold'>{category.name}</span>
+                  </div>
                 </li>
                 <button
                   onClick={() => {
@@ -206,7 +209,13 @@ export default function CategoryManager() {
                   key={category.id}
                   className='bg-slate-50 p-2 text-primary rounded shadow flex-1 flex justify-between items-center'
                 >
-                  <span className='font-semibold'>{category.name}</span>
+                  <div className="flex items-center">
+                    <span className={`w-2 h-2 block rounded-full mr-1 shadow shadow-slate-50/50`} style={{
+                      background: category?.color
+                    }}></span>
+                    <span className='font-semibold'>{category.name}</span>
+                  </div>
+
                   {category.limit && (
                     <span className='text-expenses font-semibold text-[10px]'>
                       Limit: {priceFormatter(category.limit as number)}
