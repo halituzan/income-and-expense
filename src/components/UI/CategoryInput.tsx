@@ -141,7 +141,7 @@ const CategoryInput = ({
       {isDropdownOpen && (
         <ul
           ref={dropdownRef}
-          className='absolute z-10 mt-1 w-full bg-white dark:bg-slate-700 border border-primary rounded-md shadow-lg max-h-60 overflow-auto'
+          className='absolute z-10 mt-1 w-full bg-white dark:text-white dark:bg-slate-700 border border-primary rounded-md shadow-lg max-h-60 overflow-auto'
         >
           {filteredCategories.map((category) => (
             <li

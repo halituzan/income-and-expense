@@ -28,6 +28,7 @@ import calculate from "@/helpers/calculate";
 import ExpenseChart from "../Charts/Expenses";
 import priceFormatter from "@/helpers/priceFormatter";
 import { toast } from "react-toastify";
+import ExpenseVertical from "../Charts/ExpenseVertical";
 const { notificationsSettings, expenses: expenseTable } = dbName
 const Expense: FC = () => {
   const t = useTranslations("Expense");
@@ -169,9 +170,9 @@ const Expense: FC = () => {
                     setExpenseDatas();
                     setDateRange([undefined, undefined]);
                   }}
-                  className='mr-2 text-primary dark:text-slate-100'
+                  className='mr-2 text-primary dark:text-slate-100 border border-prmary p-1 rounded-md hover:bg-slate-500 hover:text-slate-100'
                 >
-                  Clear
+                  <Icon icon="eos-icons:cleanup" />
                 </button>
                 <DateRangePicker
                   dateRange={dateRange}
@@ -239,8 +240,8 @@ const Expense: FC = () => {
 
         <div className="col-span-12 md:col-span-4 order-1 md:order-2">
           <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md">
-            <div className="max-h-[300px] h-[300px] w-full">
-              <ExpenseChart />
+            <div className=" h-[300px] w-full ">
+              <ExpenseVertical />
             </div>
           </div>
         </div>

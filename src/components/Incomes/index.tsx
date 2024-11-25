@@ -26,6 +26,7 @@ import IncomesChart from "../Charts/Incomes";
 import HistoriesAddAction from "../HistoriesAddAction";
 import DateRangePicker from "../UI/DateRangePicker";
 import dbName from "@/services/dbNames";
+import IncomeVertical from "../Charts/IncomeVertical";
 const { incomes: incomeTable } = dbName
 const Incomes = () => {
   const t = useTranslations("Income")
@@ -144,9 +145,9 @@ const Incomes = () => {
                     setIncomeDatas();
                     setDateRange([undefined, undefined]);
                   }}
-                  className='mr-2 text-primary dark:text-slate-100'
+                  className='mr-2 text-primary dark:text-slate-100 border border-prmary p-1 rounded-md hover:bg-slate-500 hover:text-slate-100'
                 >
-                  Clear
+                  <Icon icon="eos-icons:cleanup" />
                 </button>
                 <DateRangePicker
                   dateRange={dateRange}
@@ -211,7 +212,7 @@ const Incomes = () => {
         <div className="col-span-12 md:col-span-4 order-1 md:order-2">
           <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md">
             <div className="max-h-[300px] h-[300px] w-full">
-              <IncomesChart />
+              <IncomeVertical />
             </div>
           </div>
         </div>

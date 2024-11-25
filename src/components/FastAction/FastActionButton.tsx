@@ -21,7 +21,7 @@ const FastActionButton = (props: Props) => {
             </p>
         </button>
 
-        <Modal open={openAction} title={t("speedAction")} width={600} height={500} close={() => setOpenAction(!openAction)} >
+        <Modal open={openAction} title={t("speedAction")} width={600} height={600} close={() => setOpenAction(!openAction)} >
             <FastAction />
         </Modal>
     </div>;
