@@ -27,6 +27,7 @@ import HistoriesAddAction from "../HistoriesAddAction";
 import DateRangePicker from "../UI/DateRangePicker";
 import dbName from "@/services/dbNames";
 import IncomeVertical from "../Charts/IncomeVertical";
+import PiePercentChart from "../Charts/PiePercentChart";
 const { incomes: incomeTable } = dbName
 const Incomes = () => {
   const t = useTranslations("Income")
@@ -171,7 +172,11 @@ const Incomes = () => {
                   <li key={expense.id} className='py-2'>
                     <div className='flex justify-between items-center'>
                       <div>
-                        <p className='font-semibold text-primary dark:text-slate-50'>{expense?.category?.name}</p>
+                        <p className='font-semibold text-primary dark:text-slate-50 flex items-center'>
+                          <span className={`w-2 h-2 block rounded-full mr-1 shadow shadow-slate-50/50`} style={{
+                            background: expense.category?.color
+                          }}></span> {expense?.category?.name}
+                        </p>
                         <p className='text-primary/80 dark:text-slate-200 text-sm'>{expense?.description}</p>
                       </div>
                       <div className="flex items-center">
@@ -197,9 +202,12 @@ const Incomes = () => {
                     <p className='font-semibold text-primary dark:text-slate-50'>
                       {t("total")}:
                     </p>
-                    <div className='text-right'>
+                    <div className='text-right flex'>
                       <div className='font-bold text-lg text-incomes'>
                         {priceFormatter(calculate(incomes))}
+                      </div>
+                      <div className="block min-w-8 h-8 ml-2 opacity-0">
+
                       </div>
 
                     </div>
@@ -213,6 +221,11 @@ const Incomes = () => {
           <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md">
             <div className="max-h-[300px] h-[300px] w-full">
               <IncomeVertical />
+            </div>
+          </div>
+          <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md mt-2">
+            <div className=" h-[300px] w-full ">
+              <PiePercentChart data={incomes} />
             </div>
           </div>
         </div>

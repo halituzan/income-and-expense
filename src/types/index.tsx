@@ -11,6 +11,7 @@ export interface Category {
     id?: string;
     name?: string;
     limit?: number
+    color?: string
 };
 
 export interface FormattedData {

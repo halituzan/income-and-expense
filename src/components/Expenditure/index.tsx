@@ -22,6 +22,10 @@ export default function CategoryManager() {
   const [newIncomeCategory, setNewIncomeCategory] = useState("");
   const [newExpenseCategory, setNewExpenseCategory] = useState("");
   const [expenseLimit, setExpenseLimit] = useState<string>("");
+  const [incomeColor, setIncomeColor] = useState<string>("#f59e0b");
+  const [expenseColor, setExpenseColor] = useState<string>("#f59e0b");
+
+
   const [deleteItem, setDeleteItem] = useState<any>({});
   const [type, setType] = useState<"income" | "expense" | null>(null);
   //? States
@@ -30,7 +34,7 @@ export default function CategoryManager() {
   const addCategory = (type: "income" | "expense") => {
     if (type === "income" && newIncomeCategory.trim() !== "") {
       const oldData = getIncomesCategories();
-      const data = [...oldData, { id: uuidv4(), name: newIncomeCategory }];
+      const data = [...oldData, { id: uuidv4(), name: newIncomeCategory, color: incomeColor }];
       localStorage.setItem(incomeCategory, JSON.stringify(data));
       setNewIncomeCategory("");
       dispatch(setIncomeCategory(data));
@@ -38,7 +42,7 @@ export default function CategoryManager() {
       const oldData = getExpensesCategories();
       const data = [
         ...oldData,
-        { id: uuidv4(), name: newExpenseCategory, limit: expenseLimit },
+        { id: uuidv4(), name: newExpenseCategory, limit: expenseLimit, color: expenseColor },
       ];
       localStorage.setItem(expensesCategory, JSON.stringify(data));
       setNewExpenseCategory("");
@@ -90,12 +94,26 @@ export default function CategoryManager() {
             className='mb-4'
           >
             <div className='flex'>
+              <label htmlFor="colorPickerIncome" className={`peer px-3 py-2 border border-transparent rounded-l-md focus:outline-none min-w-[42px] w-[42px] h-[42px]`} style={{
+                background: incomeColor
+              }}></label>
+              <input
+                id="colorPickerIncome"
+                type='color'
+                value={incomeColor}
+                onChange={(e) => setIncomeColor(e.target.value)}
+                placeholder={"Limit"}
+                className={`opacity-0 w-0`}
+                style={{
+                  background: incomeColor
+                }}
+              />
               <input
                 type='text'
                 value={newIncomeCategory}
                 onChange={(e) => setNewIncomeCategory(e.target.value)}
                 placeholder={t("newIncome")}
-                className='flex-grow px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100 w-full'
+                className='flex-grow px-3 py-2 border focus:outline-none bg-white dark:bg-slate-100 w-full'
               />
               <button
                 type='submit'
@@ -143,12 +161,28 @@ export default function CategoryManager() {
             className='mb-4 w-full'
           >
             <div className='flex w-full flex-1'>
+
+              <label htmlFor="colorPickerExpense" className={`peer px-3 py-2 border border-transparent rounded-l-md focus:outline-none min-w-[42px] w-[42px] h-[42px]`} style={{
+                background: expenseColor
+              }}></label>
+              <input
+                id="colorPickerExpense"
+                type='color'
+                value={expenseColor}
+                onChange={(e) => setExpenseColor(e.target.value)}
+                placeholder={"Limit"}
+                className={`opacity-0 w-0`}
+                style={{
+                  background: expenseColor
+                }}
+              />
+
               <input
                 type='number'
                 value={expenseLimit}
                 onChange={(e) => setExpenseLimit(e.target.value)}
                 placeholder={"Limit"}
-                className='px-3 py-2 border rounded-l-md focus:outline-none bg-white dark:bg-slate-100 w-[100px]'
+                className='px-3 py-2 border focus:outline-none bg-white dark:bg-slate-100 w-[100px]'
               />
               <input
                 type='text'

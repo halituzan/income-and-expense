@@ -29,6 +29,7 @@ import ExpenseChart from "../Charts/Expenses";
 import priceFormatter from "@/helpers/priceFormatter";
 import { toast } from "react-toastify";
 import ExpenseVertical from "../Charts/ExpenseVertical";
+import PiePercentChart from "../Charts/PiePercentChart";
 const { notificationsSettings, expenses: expenseTable } = dbName
 const Expense: FC = () => {
   const t = useTranslations("Expense");
@@ -197,8 +198,10 @@ const Expense: FC = () => {
                   <li key={expense.id} className='py-2'>
                     <div className='flex justify-between items-center'>
                       <div>
-                        <p className='font-semibold text-primary dark:text-slate-50'>
-                          {expense?.category?.name}
+                        <p className='font-semibold text-primary dark:text-slate-50 flex items-center'>
+                          <span className={`w-2 h-2 block rounded-full mr-1 shadow shadow-slate-50/50`} style={{
+                            background: expense.category?.color
+                          }}></span> {expense?.category?.name}
                         </p>
                         <p className='text-primary/80 dark:text-slate-200 text-sm'>
                           {expense?.description}
@@ -225,9 +228,12 @@ const Expense: FC = () => {
                     <p className='font-semibold text-primary dark:text-slate-50'>
                       {t("total")}:
                     </p>
-                    <div className='text-right'>
+                    <div className='text-right flex '>
                       <div className='font-bold text-lg text-expenses'>
                         -{priceFormatter(calculate(expenses))}
+                      </div>
+                      <div className="block min-w-8 h-8 ml-2 opacity-0">
+
                       </div>
 
                     </div>
@@ -242,6 +248,11 @@ const Expense: FC = () => {
           <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md">
             <div className=" h-[300px] w-full ">
               <ExpenseVertical />
+            </div>
+          </div>
+          <div className="bg-slate-100 dark:bg-primary/80 p-6 rounded-lg shadow-md mt-2">
+            <div className=" h-[300px] w-full ">
+              <PiePercentChart data={expenses} />
             </div>
           </div>
         </div>

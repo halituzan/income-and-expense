@@ -79,7 +79,7 @@ const IncomeVertical = () => {
         <Bar
           dataKey={t("Income.tableName")}
           fill="#059669"
-          activeBar={<Rectangle fill="pink" stroke="blue" />}
+          activeBar={<Rectangle />}
         />
 
       </BarChart>

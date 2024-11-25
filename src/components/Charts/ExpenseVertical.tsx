@@ -58,7 +58,6 @@ const ExpenseVertical = () => {
     },
     []
   );
-  console.log("groupedData", groupedData);
 
   useEffect(() => {
     const expenseData = getExpense();
@@ -91,12 +90,12 @@ const ExpenseVertical = () => {
         <Bar
           dataKey={t("Expense.tableName")}
           fill="#f87171"
-          activeBar={<Rectangle fill="pink" stroke="blue" />}
+          activeBar={<Rectangle fill="pink" />}
         />
         <Bar
           dataKey={"limit"}
           fill="#f59e0b"
-          activeBar={<Rectangle fill="red" stroke="blue" />}
+          activeBar={<Rectangle />}
         />
       </BarChart>
     </ResponsiveContainer>
