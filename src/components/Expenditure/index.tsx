@@ -9,13 +9,16 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Modal from "../UI/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectExpenseCategory, selectIncomeCategory, setExpenseCategory, setIncomeCategory } from "@/lib/features/categories";
 
 const { expensesCategory, incomeCategory } = dbName;
 export default function CategoryManager() {
   const t = useTranslations("Expenditure");
+  const incomeCategories = useSelector(selectIncomeCategory)
+  const expenseCategories = useSelector(selectExpenseCategory)
+  const dispatch = useDispatch()
   //? States
-  const [incomeCategories, setIncomeCategories] = useState<Category[]>([]);
-  const [expenseCategories, setExpenseCategories] = useState<Category[]>([]);
   const [newIncomeCategory, setNewIncomeCategory] = useState("");
   const [newExpenseCategory, setNewExpenseCategory] = useState("");
   const [expenseLimit, setExpenseLimit] = useState<string>("");
@@ -30,7 +33,7 @@ export default function CategoryManager() {
       const data = [...oldData, { id: uuidv4(), name: newIncomeCategory }];
       localStorage.setItem(incomeCategory, JSON.stringify(data));
       setNewIncomeCategory("");
-      setIncomeCategories(data);
+      dispatch(setIncomeCategory(data));
     } else if (type === "expense" && newExpenseCategory.trim() !== "") {
       const oldData = getExpensesCategories();
       const data = [
@@ -40,24 +43,22 @@ export default function CategoryManager() {
       localStorage.setItem(expensesCategory, JSON.stringify(data));
       setNewExpenseCategory("");
       setExpenseLimit("");
-      setExpenseCategories(data);
+      dispatch(setExpenseCategory(data));
     }
   };
   const removeCategory = (type: "income" | "expense", id: string) => {
-    console.log("type", type);
-
     if (type === "income") {
       const oldData = getIncomesCategories();
       const data = oldData.filter((item: { id: string }) => item.id !== id);
       localStorage.setItem(incomeCategory, JSON.stringify(data));
       setNewIncomeCategory("");
-      setIncomeCategories(data);
+      dispatch(setIncomeCategory(data));
     } else if (type === "expense") {
       const oldData = getExpensesCategories();
       const data = oldData.filter((item: { id: string }) => item.id !== id);
       localStorage.setItem(expensesCategory, JSON.stringify(data));
       setNewExpenseCategory("");
-      setExpenseCategories(data);
+      dispatch(setExpenseCategory(data));
     }
     setDeleteItem({});
     setType(null);
@@ -68,8 +69,8 @@ export default function CategoryManager() {
   useEffect(() => {
     const incomeData = getIncomesCategories();
     const expensesData = getExpensesCategories();
-    setIncomeCategories(incomeData);
-    setExpenseCategories(expensesData);
+    dispatch(setIncomeCategory(incomeData));
+    dispatch(setExpenseCategory(expensesData));
   }, []);
   //? Hooks
 

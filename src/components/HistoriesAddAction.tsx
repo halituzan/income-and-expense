@@ -124,7 +124,6 @@ const HistoriesAddAction = ({
               }
             }}
             className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-primary/80 outline-none focus:outline-none text-primary dark:text-slate-100'
-            required
           />
         </div>
 

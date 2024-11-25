@@ -4,6 +4,7 @@ import { NavigationProps } from "@/types";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import FastActionButton from "../FastAction/FastActionButton";
 
 type Props = {};
 
@@ -14,6 +15,7 @@ const BottomBar = (props: Props) => {
 
   return (
     <div className='flex items-center w-full flex-1'>
+      <FastActionButton />
       <div className='flex justify-evenly flex-1 w-full'>
         {navigation.map((item: NavigationProps) => {
           const isCurrentPath = `/${locale}${item.path}`;

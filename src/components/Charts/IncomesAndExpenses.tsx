@@ -19,19 +19,21 @@ import {
 } from 'recharts';
 import useTheme from '../hooks/useTheme';
 import sortByDate from '@/helpers/sortByDate';
+import { useParams } from 'next/navigation';
 
 
 const IncomesAndExpenses = () => {
     const { theme } = useTheme()
     const t = useTranslations("Home");
     const axisColor = theme === "dark" ? "#ffffff" : "#475569";
+    const params = useParams()
     const dispatch = useDispatch();
     const income = useSelector(selectIncomes);
     const expense = useSelector(selectExpenses)
     const formatIncomeData: FormattedData[] = income.map(
         (item: any) => {
             return {
-                name: dateToMonth(item.date) as string,
+                name: dateToMonth(item.date, params.locale as string) as string,
                 date: item.date,
                 id: item.category.id,
                 [t("Income.tableName")]: item.amount,
@@ -39,7 +41,7 @@ const IncomesAndExpenses = () => {
         });
     const formatExpenseData: FormattedData[] = expense.map((item: any) => {
         return {
-            name: dateToMonth(item.date) as string,
+            name: dateToMonth(item.date, params.locale as string) as string,
             date: item.date,
             id: item.category.id,
             [t("Expense.tableName")]: - item.amount,

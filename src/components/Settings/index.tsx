@@ -142,7 +142,7 @@ const SettingsPage = (props: Props) => {
               />
             </div> */}
 
-            <div className='w-[300px] my-3'>
+            <div className='w-full md:w-[300px] my-3'>
               <label
                 htmlFor='categoryPercent'
                 className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
@@ -159,13 +159,13 @@ const SettingsPage = (props: Props) => {
                 defaultValue={80}
                 min={10}
                 max={100}
-                className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed'
+                className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-slate-100  dark:disabled:bg-slate-700 disabled:cursor-not-allowed'
                 required
                 readOnly={!notificationData.isOpenNotification}
                 disabled={!notificationData.isOpenNotification}
               />
             </div>
-            <div className='w-[300px] my-3'>
+            <div className='w-full md:w-[300px] my-3'>
               <label
                 htmlFor='currency'
                 className='block text-sm font-medium text-gray-700 dark:text-slate-100  mb-2'

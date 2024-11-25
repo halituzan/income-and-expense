@@ -63,7 +63,7 @@
         "home": "Home",
         "incomes": "Incomes History",
         "expenses": "Expenses History",
-        "items": "Income and expense items"
+        "items": "Categories"
     },
     "Exports": {
         "category": "Category",
