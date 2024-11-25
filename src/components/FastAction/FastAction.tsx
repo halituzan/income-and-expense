@@ -103,7 +103,7 @@ const FastAction = () => {
   useEffect(() => {
     const expensesData = getExpense();
     dispatch(setExpenses(expensesData));
-   
+
   }, []);
   return (
     <div className='h-full flex flex-col justify-between'>
@@ -190,7 +190,7 @@ const FastAction = () => {
             htmlFor='date'
             className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
           >
-            {t("spendTime")}
+            {tab === "expense" ? t("Expense.spendTime") : t("Income.spendTime")}
           </label>
           <input
             type='date'

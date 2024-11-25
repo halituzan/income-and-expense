@@ -15,11 +15,13 @@
     "Form": {
         "Income": {
             "name": "Gelir",
-            "button": "Gelir Ekle"
+            "button": "Gelir Ekle",
+            "spendTime": "Gelir Zamanı"
         },
         "Expense": {
             "name": "Gider",
-            "button": "Gider Ekle"
+            "button": "Gider Ekle",
+            "spendTime": "Harcama Zamanı"
         },
         "amount": "Miktar",
         "description": "Açıklama",

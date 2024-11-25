@@ -15,18 +15,19 @@
     "Form": {
         "Income": {
             "name": "Income",
-            "button": "Add Income"
+            "button": "Add Income",
+            "spendTime": "Income Time"
         },
         "Expense": {
             "name": "Expense",
-            "button": "Add Expense"
+            "button": "Add Expense",
+            "spendTime": "Spend Time"
         },
         "amount": "Amount",
         "description": "Description",
         "category": "Category",
         "selectCategory": "Select Category",
         "currency": "Select Currency",
-        "spendTime": "Spend Time",
         "limit": "Limit"
     },
     "Expense": {
