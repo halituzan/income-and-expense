@@ -6,7 +6,7 @@
             "tableName": "Income"
         },
         "Expense": {
-            "total": "Total Income",
+            "total": "Total Expense",
             "statistics": "Expense Statistics",
             "tableName": "Expense"
         },
