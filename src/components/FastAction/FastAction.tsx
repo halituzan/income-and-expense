@@ -21,6 +21,7 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import CategoryInput from "../UI/CategoryInput";
 
 type Props = {};
 const validNames: (keyof ExpenditureValues)[] = ['amount', 'categoryId', 'date', 'description'];
@@ -160,40 +161,15 @@ const FastAction = (props: Props) => {
             required
           />
         </div>
-        <div className='col-span-12 mt-0'>
-          <label
-            htmlFor='categoryId'
-            className='block text-sm font-medium text-gray-700 dark:text-slate-100 mb-2'
-          >
-            {t("category")}
-          </label>
-          <select
-            id='categoryId'
-            name='categoryId'
-            value={categoryId}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-              if (validNames.includes(e.target.name as keyof ExpenditureValues)) {
-                dispatchHandler(e.target.name as keyof ExpenditureValues, e.target.value);
-              }
-            }}
-            className='p-2 h-12 block w-full rounded-md border border-primary shadow-sm bg-slate-50 dark:bg-slate-400 outline-none focus:outline-none text-primary dark:text-white placeholder:text-primary dark:placeholder:text-slate-100'
-            required
-          >
-            <option value=''>{t("selectCategory")}</option>
-            {tab == "expense" &&
-              expenseCategories.map((cat: Category) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            {tab == "income" &&
-              incomeCategories.map((cat: Category) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-          </select>
-        </div>
+
+        <CategoryInput
+          categories={tab === "expense" ? expenseCategories : incomeCategories}
+          placeholder={t("selectCategory")}
+          label={t("category")}
+          tab={tab}
+        />
+
+
         <div className='col-span-12 mt-0'>
           <label
             htmlFor='date'
@@ -222,14 +198,14 @@ const FastAction = (props: Props) => {
               type='submit'
               className='w-full bg-expenses h-12 text-white px-4 py-2 rounded-md hover:bg-expenses/80 '
             >
-              {t("Income.button")}
+              {t("Expense.button")}
             </button>
           ) : (
             <button
               type='submit'
               className='w-full bg-incomes h-12 text-white px-4 py-2 rounded-md hover:bg-incomes/80 '
             >
-              {t("Expense.button")}
+              {t("Income.button")}
             </button>
           )}
         </div>
