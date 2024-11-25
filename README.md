@@ -1,4 +1,4 @@
-## A Next.js project as clean as your heart. ❤
+## A Next.js project as Budget App
 
 ## Ready Installations
 
@@ -10,5 +10,6 @@
 
 [Iconify:](https://iconify.design/) An icon library is used.
 
+[date-fns:](https://date-fns.org/) An date library is used.
 
 This project is developed using NextJs App Router
