@@ -1,15 +1,15 @@
-## A Next.js project as Budget App
+## NextJs Gelir Gider Uygulaması
 
-## Used Technologies
+## Kullanılan Teknolojiler
 
-[@reduxjs/toolkit:](https://redux-toolkit.js.org/) State management is utilized.
+[@reduxjs/toolkit:](https://redux-toolkit.js.org/) State yönetimi.
 
-[react-i18n:](https://react.i18next.com/) State management is utilized.
+[react-i18n:](https://react.i18next.com/) Lokalizasyon.
 
-[Tailwindcss:](https://tailwindcss.com/) A CSS library is used.
+[Tailwindcss:](https://tailwindcss.com/) CSS kütüphanesi
 
-[Iconify:](https://iconify.design/) An icon library is used.
+[Iconify:](https://iconify.design/) Icon kütüphanesi
 
-[date-fns:](https://date-fns.org/) An date library is used.
+[date-fns:](https://date-fns.org/) Zaman yönetimi.
 
-This project is developed using NextJs App Router
+[recharts:]([https://date-fns.org/](https://recharts.org/en-US/)) Grafik komponent yönetimi.
