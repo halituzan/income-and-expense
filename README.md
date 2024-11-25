@@ -1,6 +1,6 @@
 ## A Next.js project as Budget App
 
-## Ready Installations
+## Used Technologies
 
 [@reduxjs/toolkit:](https://redux-toolkit.js.org/) State management is utilized.
 
