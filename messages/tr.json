@@ -28,7 +28,6 @@
         "category": "Kategori",
         "selectCategory": "Kategori Seçin",
         "currency": "Kur Seçin",
-        "spendTime": "Harcama Zamanı",
         "limit": "Limit"
     },
     "Expense": {

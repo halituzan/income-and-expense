@@ -90,7 +90,7 @@ const HistoriesAddAction = ({
             htmlFor='date'
             className='block text-sm font-medium text-primary dark:text-slate-100 mb-2'
           >
-            {t("spendTime")}
+            {isLimit ? t("Expense.spendTime") : t("Income.spendTime")}
           </label>
           <input
             type='date'
