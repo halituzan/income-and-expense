@@ -22,8 +22,8 @@ export default function CategoryManager() {
   const [newIncomeCategory, setNewIncomeCategory] = useState("");
   const [newExpenseCategory, setNewExpenseCategory] = useState("");
   const [expenseLimit, setExpenseLimit] = useState<string>("");
-  const [incomeColor, setIncomeColor] = useState<string>("#f59e0b");
-  const [expenseColor, setExpenseColor] = useState<string>("#f59e0b");
+  const [incomeColor, setIncomeColor] = useState<string>("transparent");
+  const [expenseColor, setExpenseColor] = useState<string>("transparent");
 
 
   const [deleteItem, setDeleteItem] = useState<any>({});
@@ -94,7 +94,7 @@ export default function CategoryManager() {
             className='mb-4'
           >
             <div className='flex'>
-              <label htmlFor="colorPickerIncome" className={`peer px-3 py-2 border border-transparent rounded-l-md focus:outline-none min-w-[42px] w-[42px] h-[42px]`} style={{
+              <label htmlFor="colorPickerIncome" title="Pick Color" className={`peer px-3 py-2 border rounded-l-md focus:outline-none min-w-[42px] w-[42px] h-[42px]`} style={{
                 background: incomeColor
               }}></label>
               <input
@@ -165,7 +165,7 @@ export default function CategoryManager() {
           >
             <div className='flex w-full flex-1'>
 
-              <label htmlFor="colorPickerExpense" className={`peer px-3 py-2 border border-transparent rounded-l-md focus:outline-none min-w-[42px] w-[42px] h-[42px]`} style={{
+              <label htmlFor="colorPickerExpense" title="Pick Color" className={`peer px-3 py-2 border rounded-l-md focus:outline-none min-w-[42px] w-[42px] h-[42px]`} style={{
                 background: expenseColor
               }}></label>
               <input
@@ -174,6 +174,7 @@ export default function CategoryManager() {
                 value={expenseColor}
                 onChange={(e) => setExpenseColor(e.target.value)}
                 placeholder={"Limit"}
+
                 className={`opacity-0 w-0`}
                 style={{
                   background: expenseColor

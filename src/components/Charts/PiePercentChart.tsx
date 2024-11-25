@@ -67,7 +67,7 @@ const PiePercentChart = ({ data }: Props) => {
                     dataKey={t("Expense.tableName")}
                 >
                     {data.map((_: any, index: number) => (
-                        <Cell key={`cell-${index}`} fill={_.category.color} />
+                        <Cell key={`cell-${index}`} fill={_.category.color == "transparent" ? "black" : _.category.color} />
                     ))}
                 </Pie>
                 <Legend />
